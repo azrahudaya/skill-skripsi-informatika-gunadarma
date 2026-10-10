@@ -1,22 +1,19 @@
 # Skill Skripsi Informatika Gunadarma
 
+![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)
+![Claude Code](https://img.shields.io/badge/Agent-Claude_Code-D97706?style=flat&logo=anthropic&logoColor=white)
+![Hermes Agent](https://img.shields.io/badge/Agent-Hermes_Agent-7C3AED?style=flat)
+![OpenAI Codex](https://img.shields.io/badge/Agent-Codex-412991?style=flat&logo=openai&logoColor=white)
+![Gunadarma University](https://img.shields.io/badge/Guidelines-Universitas_Gunadarma_2025-blue?style=flat)
+![License](https://img.shields.io/badge/License-Proprietary-orange?style=flat)
+
+![Thumbnail Skripsi Informatika Gunadarma](assets/thumbnail.png)
+
 AI coding agent skill for writing, structuring, and auditing the undergraduate thesis (Skripsi) of the Informatics Study Program at Gunadarma University, based on the official 2025 guidelines. Compatible with Claude Code, OpenAI Codex, and Hermes Agent.
 
 Read the full rule specification in [`SKILL.md`](SKILL.md).
 
 > **Khusus Skripsi, bukan Penulisan Ilmiah (PI).** Skripsi adalah karya ilmiah akhir jalur Tugas Akhir semester 8 untuk gelar Sarjana Informatika (S1). Untuk PI, gunakan skill pedoman PI yang terpisah.
-
-## Apa yang dicakup
-
-- Pengertian, tujuan, dan dua bentuk Skripsi (berbasis penelitian dan berbentuk rancangan).
-- Etika penulisan ilmiah (lima sifat) dan enam bentuk pelanggaran.
-- Bagian awal: halaman judul, pernyataan orisinalitas, lembar pengesahan (tabel Panitia Ujian), abstrak, abstract, kata pengantar, daftar isi, daftar tabel/gambar/lampiran.
-- Lima bab isi: Pendahuluan, Tinjauan Pustaka, Metode Penelitian, Hasil dan Pembahasan, Penutup.
-- Bagian akhir: daftar pustaka (Harvard, DOI) dan lampiran.
-- Teknik penulisan: kertas, margin, spasi, font, penomoran bab/subbab/halaman, caption gambar/tabel.
-- Referensi pendamping: alur audit, draf dokumen, penelitian terdahulu, visual dan lampiran kode, proposal dan alur riset, dataset, administrasi non-sidang.
-
-**Di luar cakupan:** prosedur pendaftaran sidang, busana sidang, berkas sidang, dan revisi pascasidang. Bagian tersebut sengaja tidak dirinci; arahkan ke kanal resmi Prodi.
 
 ## Workflow Architecture
 
