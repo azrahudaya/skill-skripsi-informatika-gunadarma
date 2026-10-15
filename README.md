@@ -82,6 +82,8 @@ Mulai sesi baru agar agent mengenali skill. PDF pedoman resmi universitas tidak 
 - **Bab per bab:** "Susun kerangka Bab 3 Metode Penelitian untuk penelitian [topik] dengan pendekatan CRISP-DM. Sertakan subbagian data, pra-pemrosesan, model, evaluasi, dan perangkat."
 - **Penelitian terdahulu:** "Buat tabel perbandingan penelitian terdahulu untuk Bab 2. Verifikasi tiap metode dan hasil dari artikel asli. Tandai artikel yang teks lengkapnya belum dibaca."
 - **Pustaka:** "Periksa daftar pustaka saya: apakah sudah 20 sumber, 70% artikel ilmiah, format Harvard, dan DOI lengkap? Jangan buat sitasi fiktif."
+- **LaTeX / LyX:** "Bantu buatkan template LaTeX main.tex untuk skripsi Gunadarma sesuai pedoman 2025 dengan margin 4-3-4-3 cm dan format Harvard."
+- **Sidang & revisi:** "Bantu siapkan materi 12 slide presentasi sidang skripsi Informatika dan buatkan tabel matriks revisi pascasidang berdasarkan catatan penguji."
 - **Etika:** "Periksa naskah ini terhadap lima sifat etika penulisan dan tandai indikasi enam pelanggaran bila ada, dengan bukti lokasi."
 
 Hasil audit memakai status `sesuai`, `tidak sesuai`, `belum dapat diuji`, atau `pedoman ambigu`. [Alur audit](references/alur-audit.md) menjelaskan arti status dan bukti yang diperlukan. [Daftar konflik pedoman](references/ketidakselarasan.md) mencegah contoh lampiran dibaca sebagai aturan baru. Contoh keluaran bukan sertifikat kelulusan.

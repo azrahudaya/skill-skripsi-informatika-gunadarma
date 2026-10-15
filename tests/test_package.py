@@ -20,7 +20,7 @@ class TestPackage(unittest.TestCase):
         import re
 
         refs = set(re.findall(r"`(references/[^`]+\.md)`", self.skill))
-        self.assertEqual(len(refs), 19)
+        self.assertEqual(len(refs), 23)
         for rel in refs:
             self.assertTrue((ROOT / rel).is_file(), f"missing {rel}")
 

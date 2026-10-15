@@ -25,11 +25,11 @@ Skill ini **khusus Skripsi**, bukan Penulisan Ilmiah (PI). Skripsi adalah karya 
 
 Jangan terapkan otomatis ke PI, prodi lain, atau edisi pedoman lain. Jangan anggap contoh judul, angka halaman, nama pejabat, dan teks contoh sebagai persyaratan universal. Bedakan `WAJIB`, `SARAN`, `CONTOH`, dan `AMBIGU`; bila pembimbing atau administrasi memberi ketentuan terkini yang berbeda, minta bukti resmi, catat perbedaan, dan jangan diam-diam menimpa isi pedoman.
 
-**Di luar cakupan skill ini:** prosedur pendaftaran sidang, busana sidang, berkas sidang, dan revisi pascasidang [PDF 22 / cetak 21]. Bagian tersebut sengaja tidak dirinci. Jangan mengarang alur sidang; arahkan pengguna ke kanal resmi Prodi bila ditanya.
+**Di luar cakupan buku pedoman tertulis 2025:** prosedur resmi pendaftaran sidang, busana sidang, berkas sidang BAAK, dan revisi pascasidang sengaja tidak dirinci di dalam buku pedoman PDF 2025 [PDF 22 / cetak 21] melainkan diatur melalui portal resmi BAAK dan Prodi. Namun untuk menjawab kebutuhan menyeluruh mahasiswa, skill ini melengkapinya dengan panduan operasional praktis, slide presentasi, simulasi tanya-jawab, dan matriks revisi di `references/alur-sidang-dan-revisi.md`.
 
 ## Alur kerja
 
-Untuk audit naskah, ikuti `references/alur-audit.md` dan laporkan batas berkas yang tersedia. Untuk membuat draf naskah lengkap, baca `references/draf-dokumen.md` sebelum membuat dokumen. Untuk bab isi, baca referensi bab yang sesuai: `references/bab1-pendahuluan.md` sampai `references/bab5-penutup.md`. Untuk visual dan lampiran kode, baca `references/visual-dan-lampiran-kode.md` dan `references/pedoman-visual-dan-evaluasi.md`. Untuk sitasi dan daftar pustaka, baca `references/sitasi-dan-daftar-pustaka.md`.
+Untuk audit naskah, jalankan tool otomatis `python3 scripts/audit_skripsi.py <naskah>` dan ikuti alur audit di `references/alur-audit.md`. Untuk audit substansi teknis AI/Data Science, Rekayasa Perangkat Lunak, dan penelusuran benang merah logika (traceability), baca `references/audit-substansi-informatika.md`. Untuk membuat draf naskah lengkap, baca `references/draf-dokumen.md` serta `references/panduan-latex-lyx.md` (untuk LaTeX/LyX). Untuk luaran wajib berupa artikel ilmiah dan petunjuk sistem, baca `references/artikel-ilmiah-dan-manual-book.md`. Untuk bab isi, baca referensi bab yang sesuai: `references/bab1-pendahuluan.md` sampai `references/bab5-penutup.md`. Untuk visual dan lampiran kode, baca `references/visual-dan-lampiran-kode.md` dan `references/pedoman-visual-dan-evaluasi.md`. Untuk sitasi dan daftar pustaka, baca `references/sitasi-dan-daftar-pustaka.md`. Untuk sidang dan pascasidang, baca `references/alur-sidang-dan-revisi.md`.
 
 1. Temukan PDF pedoman dan naskah Skripsi versi terakhir. Pastikan dokumen benar-benar edisi Prodi Informatika 2025. Rujuk halaman PDF dan angka tercetak agar lokasi aturan bisa diverifikasi. Untuk audit format visual, baca `references/konflik-visual-lampiran.md` sebelum menilai contoh sebagai patokan.
 2. Tentukan jenis tugas: perencanaan topik/proposal, penulisan, audit, atau pengumpulan. Untuk audit, buat matriks `aturan | status | bukti lokasi dokumen | halaman pedoman | tindakan` dan periksa semua butir relevan di bawah. Jangan mengklaim kelulusan hanya dari pencarian kata; cek isi, tata letak, nomor halaman, dan berkas akhir.
@@ -102,12 +102,12 @@ Enam bentuk pelanggaran: (1) Fabrikasi (merekayasa data yang tidak ada), (2) Fal
 
 ## 8. Alur penyelesaian dan administrasi non-sidang [PDF 22 / cetak 21]
 
-Bagian ini hanya mencakup kegiatan non-sidang. **Prosedur pendaftaran sidang, busana sidang, berkas sidang, dan revisi pascasidang sengaja tidak dirinci** di skill ini; arahkan pengguna ke kanal resmi Prodi.
+Bagian ini merangkum alur bimbingan dan luaran resmi. Untuk panduan lengkap pendaftaran sidang BAAK, busana sidang, slide presentasi, simulasi tanya-jawab, dan penyelesaian matriks revisi pascasidang, baca `references/alur-sidang-dan-revisi.md`.
 
 - Mahasiswa mendapat informasi nama dosen pembimbing pada modul akademik di Studentsite; Program Studi mengumumkan kontak pembimbing melalui email dan mahasiswa segera menghubungi pembimbing.
 - Selama bimbingan, mahasiswa membawa buku agenda bimbingan skripsi yang dapat diunduh di https://fti.gunadarma.ac.id/informatika/?page_id=530 .
-- Setelah mendapat persetujuan pembimbing, selain penulisan skripsi mahasiswa berkewajiban membuat **artikel ilmiah** dan **manual book** dari penulisan skripsi. Template artikel ilmiah dan manual book disediakan Prodi melalui tautan Google Drive pada pedoman.
-- Pendaftaran sidang dan proses lanjutan diarahkan ke kanal resmi Prodi (https://fti.gunadarma.ac.id/informatika/ ), di luar cakupan skill ini. Detail administrasi non-sidang di `references/administrasi.md`.
+- Setelah mendapat persetujuan pembimbing, selain penulisan skripsi mahasiswa berkewajiban membuat **artikel ilmiah** dan **manual book** dari penulisan skripsi. Format dan rincian penyusunannya diatur di `references/artikel-ilmiah-dan-manual-book.md`.
+- Detail administrasi bimbingan di `references/administrasi.md`.
 
 ## Ketidakselarasan yang tidak boleh disembunyikan
 
@@ -118,7 +118,8 @@ Baca `references/ketidakselarasan.md` untuk daftar konflik dan contoh. Jangan pu
 - Struktur bagian, semua komponen awal, lima bab isi, bagian akhir dan lampiran hadir sesuai relevansi; Daftar Isi serta daftar ilustrasi sesuai halaman sebenarnya.
 - Latar belakang menjelaskan alasan dengan data dan pembanding penelitian terdahulu; rumusan masalah, ruang lingkup, tujuan, dan sistematika konsisten; setiap subbab minimum tiga paragraf.
 - Bab 2 memuat landasan teori dan empiris dengan minimal 20 sumber (70% artikel ilmiah, 10 tahun terakhir); Bab 3 memaparkan metode yang dapat diulangi; Bab 4 menafsirkan hasil dan mengaitkan teori; Bab 5 menjawab rumusan masalah dan tidak mengulang Bab 4.
-- Format font, kertas, margin, spasi, judul bab/subbab, caption gambar/tabel, tabel bersambung, dan penomoran halaman diperiksa pada file sumber dan PDF final. Jangan menebak dari teks ekstraksi saja.
+- Substansi riset diuji dengan `references/audit-substansi-informatika.md`: pencegahan kebocoran data (data leakage) dan metrik komprehensif untuk AI; sinkronisasi UML, skema DB, dan pengujian blackbox/SUS untuk rekayasa perangkat lunak; serta matriks traceability antar-bab.
+- Format font, kertas, margin, spasi, judul bab/subbab, caption gambar/tabel, tabel bersambung, dan penomoran halaman diperiksa pada file sumber (DOCX atau LaTeX/LyX via `references/panduan-latex-lyx.md`) dan PDF final. Jalankan `python3 scripts/audit_skripsi.py <naskah>` untuk verifikasi otomatis awal.
 - Abstrak dan Abstract masing-masing maksimum 250 kata, kata kunci, tahun Daftar Pustaka, dan hitungan halaman diperiksa; tidak ada nama, tanggal, atau tanda tangan yang direka.
 - Daftar pustaka dibuat otomatis, Harvard, mencantumkan DOI, alfabetis, pasangan sitasi dan pustaka lengkap dua arah, serta memenuhi komposisi 70% artikel ilmiah.
 - Saat melaporkan kepatuhan, beri status `sesuai / tidak sesuai / belum dapat diuji / pedoman ambigu` pada tiap poin; laporkan konflik dengan kedua halaman, bukan membuat ketentuan baru.
@@ -144,4 +145,8 @@ Baca `references/ketidakselarasan.md` untuk daftar konflik dan contoh. Jangan pu
 - `references/proposal-dan-alur-riset.md`: proposal, alur penyelesaian non-sidang, artikel ilmiah, manual book.
 - `references/dataset-dan-reproduksibilitas.md`: sumber data, split, seed, ledger klaim.
 - `references/administrasi.md`: agenda bimbingan dan kewajiban non-sidang.
+- `references/alur-sidang-dan-revisi.md`: alur sidang BAAK, busana, slide presentasi, simulasi Q&A, dan matriks revisi.
+- `references/artikel-ilmiah-dan-manual-book.md`: format dan struktur luaran wajib artikel ilmiah serta manual book.
+- `references/audit-substansi-informatika.md`: audit substansi teknis AI/Data Science, Rekayasa Perangkat Lunak, dan matriks keterkaitan logika.
+- `references/panduan-latex-lyx.md`: panduan template, konfigurasi preamble LaTeX dan pengaturan LyX standar Gunadarma.
 - PDF pedoman asli: berkas resmi Prodi Informatika 2025, sumber primer untuk redaksi dan tampilan halaman. PDF tidak didistribusikan ulang dalam repo ini; jangan samakan ringkasan skill dengan naskah asli.
