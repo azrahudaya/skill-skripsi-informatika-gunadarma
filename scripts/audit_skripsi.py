@@ -163,6 +163,22 @@ def parse_plain_lines(content: str) -> list[dict]:
             style = "Heading1" if level == 1 else "Heading2" if level == 2 else "Heading3"
             paragraphs.append({"text": h_match.group(2).strip(), "style": style})
             continue
+
+        # Deteksi judul bab atau subbab bernomor pada teks polos / ekstraksi PDF
+        sec_num_match = re.match(r"^(\d{1,2}\.\d{1,2}(?:\.\d{1,2})?\s+[A-Z].*)$", clean)
+        if sec_num_match and "..." not in clean and " . " not in clean and len(clean) < 80:
+            flush_buffer()
+            level = clean.split()[0].count(".")
+            style = "Heading2" if level == 1 else "Heading3"
+            paragraphs.append({"text": clean, "style": style})
+            continue
+
+        chap_num_match = re.match(r"^(\d{1,2}\.\s+[A-Z\s]{4,}|(?:BAB\s+(?:[0-9]+|[IVXLCDM]+))\s*.*)$", clean)
+        if chap_num_match and "..." not in clean and " . " not in clean and len(clean) < 80:
+            flush_buffer()
+            paragraphs.append({"text": clean, "style": "Heading1"})
+            continue
+
         buffer.append(clean)
     flush_buffer()
     return paragraphs
@@ -242,8 +258,9 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
         txt = p["text"]
         style = p.get("style", "")
 
-        # Tandai saat mulai masuk ke Bagian Isi (Bab 1)
-        if re.search(r"(?im)^(\s*bab\s*(1|i)\b|\s*1\.\s+).*pendahuluan", txt) or (style == "Heading1" and "pendahuluan" in txt.lower()):
+        # Tandai saat mulai masuk ke Bagian Isi (Bab 1, abaikan bila masih di daftar isi bertitik-titik)
+        is_bab1 = bool(re.search(r"(?im)^(\s*bab\s*(1|i)\b|\s*1\.\s+).*pendahuluan", txt) or (style == "Heading1" and "pendahuluan" in txt.lower()))
+        if is_bab1 and "..." not in txt and " . " not in txt:
             inside_body = True
 
         # Hentikan saat masuk Daftar Pustaka atau Lampiran
