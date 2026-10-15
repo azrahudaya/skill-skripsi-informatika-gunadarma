@@ -102,7 +102,7 @@ Enam bentuk pelanggaran: (1) Fabrikasi (merekayasa data yang tidak ada), (2) Fal
 
 ## 8. Alur penyelesaian dan administrasi non-sidang [PDF 22 / cetak 21]
 
-Bagian ini merangkum alur bimbingan dan luaran resmi. Untuk panduan lengkap pendaftaran sidang BAAK, busana sidang, slide presentasi, simulasi tanya-jawab, dan penyelesaian matriks revisi pascasidang, baca `references/alur-sidang-dan-revisi.md`.
+Bagian ini merangkum alur bimbingan dan luaran resmi. Untuk panduan lengkap pendaftaran sidang BAAK, busana sidang, slide presentasi, simulasi tanya-jawab, dan penyelesaian matriks revisi pascasidang, baca `references/alur-sidang-dan-revisi.md`. Untuk persiapan pemecahan berkas akhir dan pengunggahan ke repositori perpustakaan digital Gunadarma (GDLib) dengan konvensi 01 sampai 19, baca `references/gdlib-repository-upload.md` dan periksa dengan `python3 scripts/split_gdlib.py`.
 
 - Mahasiswa mendapat informasi nama dosen pembimbing pada modul akademik di Studentsite; Program Studi mengumumkan kontak pembimbing melalui email dan mahasiswa segera menghubungi pembimbing.
 - Selama bimbingan, mahasiswa membawa buku agenda bimbingan skripsi yang dapat diunduh di https://fti.gunadarma.ac.id/informatika/?page_id=530 .
@@ -152,4 +152,5 @@ Baca `references/ketidakselarasan.md` untuk daftar konflik dan contoh. Jangan pu
 - `references/glosarium-istilah-informatika.md`: kamus padanan baku komputasi dan istilah asing yang wajib dicetak miring.
 - `references/panduan-pembuatan-dari-nol.md`: alur kerja 9 fase pembuatan skripsi dari nol bagi AI dan mahasiswa.
 - `references/bagian-awal-naskah.md`: format detail setiap komponen sebelum Bab 1 (judul, pengesahan, orisinalitas, abstrak, pengantar, daftar isi).
+- `references/gdlib-repository-upload.md`: pola berkas baku repositori perpustakaan Gunadarma (GDLib) 01 sampai 19.
 - PDF pedoman asli: berkas resmi Prodi Informatika 2025, sumber primer untuk redaksi dan tampilan halaman. PDF tidak didistribusikan ulang dalam repo ini; jangan samakan ringkasan skill dengan naskah asli.
