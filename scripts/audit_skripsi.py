@@ -202,9 +202,9 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
 
     # 2. Cek Bagian Awal Lengkap (Sebelum Bab 1) [PDF 11-16 / cetak 10-15]
     front_matter_checks = {
-        "Halaman Judul": bool(re.search(r"(?i)universitas\s*gunadarma.*fakultas\s*teknologi\s*industri", full_text)),
+        "Halaman Judul": bool(re.search(r"(?is)universitas\s*gunadarma.*?fakultas\s*teknologi\s*industri", full_text)),
         "Lembar Pengesahan": bool(re.search(r"(?i)lembar\s*pengesahan", full_text)),
-        "Tabel Panitia Ujian": bool(re.search(r"(?i)panitia\s*ujian.*(ketua|sekretaris|anggota)", full_text)),
+        "Tabel Panitia Ujian": bool(re.search(r"(?is)panitia\s*ujian.*?(ketua|sekretaris|anggota)", full_text)),
         "Pernyataan Orisinalitas & Publikasi": bool(re.search(r"(?i)pernyataan\s*orisinalitas|orisinalitas\s*dan\s*publikasi", full_text)),
         "Abstrak (Indonesia)": bool(re.search(r"(?i)\babstrak\b", full_text)),
         "Kata Kunci Abstrak ID": bool(re.search(r"(?i)kata\s*kunci\s*:", full_text)),
@@ -230,19 +230,36 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
     if m_abs_en:
         abstract_eng_words = len(re.findall(r"\b\w+\b", m_abs_en.group(1)))
 
-    # 4. Cek aturan minimal 3 paragraf per subbab
+    # 4. Cek aturan minimal 3 paragraf per subbab (hanya di dalam Bagian Isi, setelah Bab 1)
     subsections = []
     current_sub = None
     sub_paras = []
+    inside_body = False
 
-    sub_pattern = re.compile(r"^\d+\.\d+(\.\d+)?\b", re.IGNORECASE)
+    sub_pattern = re.compile(r"^\d{1,2}\.\d{1,2}(?:\.\d{1,2})?\s+[A-Z]")
 
     for p in paragraphs:
         txt = p["text"]
         style = p.get("style", "")
-        # Subbab yang wajib 3 paragraf adalah subbab bernomor di dalam bab (misal 1.1, 2.1.3)
+
+        # Tandai saat mulai masuk ke Bagian Isi (Bab 1)
+        if re.search(r"(?im)^(\s*bab\s*(1|i)\b|\s*1\.\s+).*pendahuluan", txt) or (style == "Heading1" and "pendahuluan" in txt.lower()):
+            inside_body = True
+
+        # Hentikan saat masuk Daftar Pustaka atau Lampiran
+        if re.search(r"(?i)^(daftar\s*pustaka|lampiran)\b", txt):
+            inside_body = False
+            if current_sub:
+                subsections.append({"title": current_sub, "paragraph_count": len(sub_paras)})
+                current_sub = None
+                sub_paras = []
+
+        if not inside_body:
+            continue
+
+        # Subbab yang wajib 3 paragraf adalah subbab bernomor di dalam bab (misal 1.1 Judul, 2.1.3 Judul), abaikan baris daftar isi yang bertitik-titik
         is_sub = bool(sub_pattern.match(txt) or (style in ("Heading2", "Heading3") and sub_pattern.match(txt)))
-        if is_sub:
+        if is_sub and "..." not in txt and " . " not in txt:
             if current_sub:
                 subsections.append({"title": current_sub, "paragraph_count": len(sub_paras)})
             current_sub = txt[:60]
@@ -266,11 +283,12 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
     if bibtex_entries:
         total_references = len(bibtex_entries)
     else:
-        raw_entries = [e.strip() for e in re.split(r"\n{2,}|\n(?=[A-Z][a-zA-Z\s]+,\s*\d{4})", dp_text) if len(e.strip()) > 15]
+        # Pisahkan entri berdasarkan newline ganda atau awalan Nama Penulis (Tahun) / Nama Penulis, Tahun
+        raw_entries = [e.strip() for e in re.split(r"\n{2,}|\n(?=[A-Z][a-zA-Z\s.,&]+(?:\(\d{4}\)|,\s*\d{4}))", dp_text) if len(e.strip()) > 15]
         total_references = len(raw_entries)
 
     doi_count = len(re.findall(r"\b10\.\d{4,9}/[-._;()/:A-Za-z0-9]+|doi\.org/\S+|doi\s*=\s*\{[^}]+\}", dp_text, re.IGNORECASE))
-    journal_indicators = len(re.findall(r"(?i)\b(jurnal|journal|vol\.|no\.|prosiding|proceedings|trans\.|ieee|acm|sciencedirect|@article|@inproceedings)\b", dp_text))
+    journal_indicators = len(re.findall(r"(?i)\b(jurnal|journal|vol\.|no\.|prosiding|proceedings|trans\.|ieee|acm|sciencedirect|cell|letters|springer|elsevier|mdpi|applied\s*sciences|@article|@inproceedings)\b|\b\d+\(\d+\)", dp_text))
 
     # Rasio estimasi artikel ilmiah (jurnal/prosiding)
     journal_pct = (journal_indicators / total_references * 100) if total_references > 0 else 0
