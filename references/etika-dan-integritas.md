@@ -26,3 +26,16 @@ Etika penulisan ilmiah adalah norma atau standar aturan perilaku yang harus dila
 - Kutipan langsung diberi tanda kutip dan sumber; parafrase tetap diberi sitasi.
 - Data mentah disimpan dan dapat ditelusuri; jangan mengubah data agar sesuai harapan.
 - Bila menemukan indikasi pelanggaran pada naskah yang diaudit, tandai sebagai temuan etika dengan bukti lokasi, jangan menyimpulkan tanpa bukti.
+
+## Ambang batas Turnitin dan anti-plagiarisme
+
+1. **Standar Nilai Kesamaan (Similarity Index)**: Program Studi Informatika FTI Universitas Gunadarma umumnya menetapkan batas toleransi similarity index maksimal **20% sampai 25%** dengan filter *Exclude Bibliography* dan *Exclude Matches < 1%* diaktifkan.
+2. **Kecocokan per Sumber Tunggal**: Tidak boleh ada satu sumber tunggal yang menyumbang kemiripan lebih dari 3% sampai 5% di dalam naskah.
+3. **Teknik Parafrase Etis**: Parafrase wajib mengubah struktur kalimat dan sudut pandang penyampaian menggunakan pemahaman sendiri, bukan sekadar menggunakan alat *spinner* kata otomatis yang merusak tata bahasa baku.
+
+## Deklarasi pemanfaatan AI generatif (Generative AI Disclosure)
+
+Jika mahasiswa memanfaatkan alat bantu kecerdasan buatan (seperti ChatGPT, Claude, GitHub Copilot, atau LLM lokal) selama proses penelitian atau penulisan skripsi:
+1. **Transparansi Peran AI**: Cantumkan secara jujur pada Kata Pengantar atau Catatan Penulis mengenai batasan pemanfaatan AI (misal: digunakan untuk bantuan eksplorasi sintaks kode atau perbaikan tata bahasa Inggris pada Abstract).
+2. **Larangan AI Penuh**: Menyerahkan teks analisis hasil (Bab 4) atau kesimpulan riset (Bab 5) yang digenerate murni oleh AI tanpa analisis mandiri mahasiswa diklasifikasikan sebagai pelanggaran integritas akademik dan kepengarangan tidak sah.
+3. **Tanggung Jawab Ilmiah**: Mahasiswa memegang tanggung jawab penuh 100% atas kebenaran faktual data, rumus, algoritma, dan sitasi yang tercantum di dalam naskah skripsi. Teks halusinasi AI yang masuk ke naskah dianggap sebagai kelalaian fatal penulis.

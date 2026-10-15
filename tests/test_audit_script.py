@@ -14,47 +14,47 @@ Ini adalah ringkasan penelitian yang dibuat singkat dan padat untuk menguji bata
 ## Abstract
 This is an English abstract sample to test word limits and structure.
 
-# BAB 1 PENDAHULUAN
+1. PENDAHULUAN
 
-## 1.1 Latar Belakang
+1.1 Latar Belakang
 Paragraf pertama latar belakang menjelaskan masalah komputasi yang dihadapi mahasiswa Informatika.
 
 Paragraf kedua menjelaskan perlunya otomatisasi dan verifikasi mandiri berbasis aturan pedoman 2025.
 
 Paragraf ketiga merangkum solusi inovatif yang diajukan beserta keunggulannya.
 
-## 1.2 Rumusan Masalah
+1.2 Rumusan Masalah
 Paragraf tunggal yang sengaja dibuat kurang dari tiga paragraf untuk menguji deteksi subbab pendek.
 
-## 1.3 Tujuan Penelitian
+1.3 Tujuan Penelitian
 Tujuan pertama dari penelitian ini.
 
 Tujuan kedua dari penelitian ini.
 
 Tujuan ketiga dari penelitian ini.
 
-# BAB 2 TINJAUAN PUSTAKA
+2. TINJAUAN PUSTAKA
 Paragraf 1 tinjauan pustaka.
 Paragraf 2 tinjauan pustaka.
 Paragraf 3 tinjauan pustaka.
 
-# BAB 3 METODE PENELITIAN
+3. METODE PENELITIAN
 Paragraf 1 metode penelitian.
 Paragraf 2 metode penelitian.
 Paragraf 3 metode penelitian.
 
-# BAB 4 HASIL DAN PEMBAHASAN
+4. HASIL DAN PEMBAHASAN
 Paragraf 1 hasil dan pembahasan.
 Paragraf 2 hasil dan pembahasan.
 Paragraf 3 hasil dan pembahasan.
 
-# BAB 5 PENUTUP
-## 5.1 Kesimpulan
+5. PENUTUP
+5.1 Kesimpulan
 Kesimpulan 1 menjawab rumusan masalah.
 Kesimpulan 2 menjawab tujuan.
 Kesimpulan 3 memberikan ringkasan kontribusi.
 
-# DAFTAR PUSTAKA
+DAFTAR PUSTAKA
 Ahmad, F. 2024. Penerapan Machine Learning. Jurnal Informatika, 10(2), 12-20. doi:10.1234/ji.2024.01
 Budi, S. 2023. Deep Learning Architecture. IEEE Trans on AI, 5(1), 40-50. doi:10.1109/TAI.2023.12
 """
@@ -70,7 +70,7 @@ class TestAuditScript(unittest.TestCase):
             paras = extract_text_from_plain(tf_path)
             report = audit_manuscript(paras)
 
-            # Cek 5 bab
+            # Cek 5 bab (dengan format 1. PENDAHULUAN tanpa kata BAB)
             self.assertTrue(report["bab_checks"]["Bab 1 Pendahuluan"])
             self.assertTrue(report["bab_checks"]["Bab 2 Tinjauan Pustaka"])
             self.assertTrue(report["bab_checks"]["Bab 3 Metode Penelitian"])
@@ -92,28 +92,50 @@ class TestAuditScript(unittest.TestCase):
             if tf_path.is_file():
                 tf_path.unlink()
 
-    def test_latex_extraction(self):
-        tex_sample = r"""
-        \chapter{BAB 1 PENDAHULUAN}
-        \section{1.1 Latar Belakang}
-        Paragraf pertama dalam latex.
+    def test_latex_modular_and_bib(self):
+        with tempfile.TemporaryDirectory() as td:
+            dir_path = Path(td)
+            ch_dir = dir_path / "chapters"
+            ch_dir.mkdir()
 
-        Paragraf kedua dalam latex.
+            bab1 = ch_dir / "bab1.tex"
+            bab1.write_text(r"""
+            \chapter{1. Pendahuluan}
+            \section{1.1 Latar Belakang}
+            Paragraf 1 dalam bab 1.
 
-        Paragraf ketiga dalam latex.
-        """
-        with tempfile.NamedTemporaryFile("w+", suffix=".tex", delete=False) as tf:
-            tf.write(tex_sample)
-            tf_path = Path(tf.name)
+            Paragraf 2 dalam bab 1.
 
-        try:
-            paras = extract_text_from_tex(tf_path)
-            self.assertTrue(any(p["style"] == "Heading1" for p in paras))
-            self.assertTrue(any(p["style"] == "Heading2" for p in paras))
-            self.assertGreaterEqual(len(paras), 4)
-        finally:
-            if tf_path.is_file():
-                tf_path.unlink()
+            Paragraf 3 dalam bab 1.
+            """, encoding="utf-8")
+
+            bib = dir_path / "daftar-pustaka.bib"
+            bib.write_text(r"""
+            @article{andi2024,
+              author = {Andi, B.},
+              title = {Riset Informatika},
+              journal = {Jurnal Gunadarma},
+              year = {2024},
+              doi = {10.1234/gundar.2024}
+            }
+            """, encoding="utf-8")
+
+            main = dir_path / "main.tex"
+            main.write_text(r"""
+            \documentclass{report}
+            \addbibresource{daftar-pustaka.bib}
+            \begin{document}
+            \input{chapters/bab1}
+            \end{document}
+            """, encoding="utf-8")
+
+            paras = extract_text_from_tex(main)
+            self.assertTrue(any("1. Pendahuluan" in p["text"] for p in paras))
+            self.assertTrue(any("DAFTAR PUSTAKA" in p["text"] for p in paras))
+            report = audit_manuscript(paras)
+            self.assertTrue(report["bab_checks"]["Bab 1 Pendahuluan"])
+            self.assertEqual(report["bibliography"]["total_detected"], 1)
+            self.assertEqual(report["bibliography"]["doi_count"], 1)
 
 
 if __name__ == "__main__":

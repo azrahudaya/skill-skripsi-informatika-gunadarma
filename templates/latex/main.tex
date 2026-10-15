@@ -1,0 +1,215 @@
+\documentclass[12pt,a4paper,oneside]{report}
+
+% ==============================================================================
+% TEMPLATE SKRIPSI INFORMATIKA UNIVERSITAS GUNADARMA 2025
+% Sesuai Buku Pedoman Penulisan Skripsi 2025, FTI Universitas Gunadarma
+% ==============================================================================
+
+% 1. Batas Margin: Atas 4 cm, Bawah 3 cm, Kiri 4 cm, Kanan 3 cm [PDF 19 / cetak 18]
+\usepackage[top=4cm, bottom=3cm, left=4cm, right=3cm]{geometry}
+
+% 2. Tipografi: Times New Roman 12 pt [PDF 19 / cetak 18]
+\usepackage{newtxtext,newtxmath}
+
+% 3. Pengaturan Spasi: 1.5 spasi untuk teks tubuh naskah [PDF 19 / cetak 18]
+\usepackage{setspace}
+\onehalfspacing
+
+% 4. Bahasa dan Ekstensi
+\usepackage[indonesian]{babel}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+
+% 5. Caption Gambar & Tabel [PDF 20 / cetak 19]
+\captionsetup[table]{position=top, justification=centering, labelsep=period}
+\captionsetup[figure]{position=bottom, justification=centering, labelsep=period}
+
+% 6. Penataan Header & Footer Penomoran Halaman [PDF 20 / cetak 19]
+\usepackage{fancyhdr}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage} % Tengah bawah untuk halaman awal bab
+  \renewcommand{\headrulewidth}{0pt}
+}
+\fancypagestyle{maincontent}{
+  \fancyhf{}
+  \fancyhead[R]{\thepage} % Pojok kanan atas untuk halaman isi lanjutan
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% 7. Kode Program: Ukuran 8 pt, Spasi Tunggal [PDF 18 / cetak 17]
+\usepackage{listings}
+\lstset{
+  basicstyle=\fontsize{8}{10}\ttfamily,
+  breaklines=true,
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  showstringspaces=false
+}
+
+% 8. Daftar Pustaka Harvard + Wajib DOI [PDF 20 / cetak 19]
+\usepackage[backend=biber,style=authoryear,sorting=nyt,maxcitenames=2]{biblatex}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue
+}
+\addbibresource{daftar-pustaka.bib}
+
+\begin{document}
+
+% ---------------- BAGIAN AWAL ----------------
+\pagestyle{plain}
+\pagenumbering{roman}
+
+% Catatan: Halaman Judul & Lembar Pengesahan dihitung tapi nomornya tidak ditampilkan
+\setcounter{page}{1}
+
+\begin{center}
+  \vspace*{2cm}
+  {\fontsize{14}{16}\bfseries\MakeUppercase{Judul Skripsi Deklaratif Menggambarkan Masalah Metode dan Objek}}\\[2cm]
+  {\fontsize{12}{14}\selectfont SKRIPSI}\\[1cm]
+  {\fontsize{12}{14}\selectfont Diajukan Guna Melengkapi Sebagian Syarat Dalam Mencapai Gelar Sarjana Strata Satu (S1)}\\[2cm]
+  {\fontsize{12}{14}\bfseries Nama Mahasiswa}\\
+  {\fontsize{12}{14}\bfseries NPM: 10121001}\\[3cm]
+  {\fontsize{14}{16}\bfseries PROGRAM STUDI INFORMATIKA\\FAKULTAS TEKNOLOGI INDUSTRI\\UNIVERSITAS GUNADARMA\\JAKARTA\\2025}
+\end{center}
+\newpage
+
+% Abstrak (Indonesia) - Maks 250 Kata, 1 Spasi
+\begin{singlespace}
+\chapter*{ABSTRAK}
+\addcontentsline{toc}{chapter}{ABSTRAK}
+Nama Mahasiswa. 10121001\\
+\textbf{Judul Skripsi Deklaratif Menggambarkan Masalah Metode dan Objek}\\
+Skripsi. Program Studi Informatika, Fakultas Teknologi Industri, Universitas Gunadarma, 2025.\\
+Kata Kunci: Deep Learning, Evaluasi Metrik, Informatika, Klasifikasi, Reprodusibilitas.\\
+(xiv + 85 + Lampiran)\\[0.5cm]
+
+Perkembangan teknologi komputasi modern membutuhkan sistem cerdas yang mampu memproses data berskala besar secara andal dan terukur. Penelitian ini bertujuan untuk merancang dan mengimplementasikan model pembelajaran mendalam guna menyelesaikan permasalahan klasifikasi citra pada domain yang memiliki ketimpangan data. Metode yang digunakan adalah arsitektur jaringan saraf konvolusi yang dikombinasikan dengan teknik pra-pemrosesan data augmentasi dan penyeimbangan bobot kelas untuk mencegah kebocoran data pada tahap validasi.
+
+Pengujian dilakukan menggunakan dataset publik dengan pembagian 80 persen data latih, 10 persen data validasi, dan 10 persen data uji. Hasil pengujian menunjukkan bahwa model yang diusulkan mencapai tingkat akurasi sebesar 93.4 persen, dengan nilai precision 92.8 persen, recall 91.5 persen, dan F1-Score sebesar 92.1 persen. Kesimpulan dari penelitian ini membuktikan bahwa penanganan ketimpangan data sebelum proses pelatihan berhasil meningkatkan performa klasifikasi secara konsisten.
+\end{singlespace}
+\newpage
+
+% Abstract (English) - Max 250 Words, Single Space
+\begin{singlespace}
+\chapter*{ABSTRACT}
+\addcontentsline{toc}{chapter}{ABSTRACT}
+Student Name. 10121001\\
+\textbf{Declarative Thesis Title Describing Problem Method and Object}\\
+Undergraduate Thesis. Informatics Department, Faculty of Industrial Technology, Gunadarma University, 2025.\\
+Keywords: Classification, Deep Learning, Evaluation Metrics, Informatics, Reproducibility.\\
+(xiv + 85 + Appendices)\\[0.5cm]
+
+Modern computational advancements require robust and scalable intelligent systems capable of processing large-scale data. This study aims to design and implement a deep learning architecture to address image classification challenges in domains characterized by significant class imbalance. The proposed method utilizes a convolutional neural network combined with data augmentation and class weighting techniques while strictly preventing data leakage across validation stages.
+
+Experiments were conducted on a public dataset partitioned into 80 percent training, 10 percent validation, and 10 percent testing sets. Experimental results demonstrate that the proposed model achieves an overall accuracy of 93.4 percent, with a precision of 92.8 percent, recall of 91.5 percent, and an F1-Score of 92.1 percent. The findings confirm that mitigating class imbalance prior to model training effectively enhances classification performance.
+\end{singlespace}
+\newpage
+
+\tableofcontents
+\newpage
+\listoftables
+\newpage
+\listoffigures
+\newpage
+
+% ---------------- BAGIAN ISI (Nomor Arab) ----------------
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{maincontent}
+
+\chapter{PENDAHULUAN}
+\section{1.1 Latar Belakang}
+Perkembangan teknologi informasi dan kecerdasan buatan telah mengubah lanskap berbagai sektor industri dan penelitian akademis secara revolusioner. Kebutuhan akan pengolahan data otomatis yang cepat dan presisi semakin mendesak seiring dengan ledakan volume data digital yang dihasilkan setiap harinya.
+
+Namun demikian, implementasi model komputasi cerdas seringkali menghadapi kendala signifikan terkait keterbatasan kualitas dataset, ketimpangan distribusi kelas, dan tingginya risiko kebocoran data pada saat validasi. Banyak penelitian sebelumnya belum menerapkan prosedur pengujian yang terstandardisasi sehingga hasil evaluasi yang dilaporkan cenderung terlalu optimis dan sulit direproduksi di lingkungan produksi nyata.
+
+Oleh karena itu, penelitian ini berfokus pada perancangan arsitektur sistem komputasi yang terstruktur dengan menerapkan metodologi validasi ketat dan evaluasi performa komprehensif. Diharapkan solusi yang dibangun dapat memberikan kontribusi nyata bagi pengembangan ilmu informatika dan memberikan acuan implementasi yang dapat diandalkan oleh komunitas praktisi.
+
+\section{1.2 Rumusan Masalah}
+Berdasarkan latar belakang masalah yang telah diuraikan, rumusan masalah dalam penelitian ini dirumuskan sebagai berikut:
+Bagaimana merancang arsitektur model komputasi yang mampu menangani ketimpangan data tanpa mengalami kebocoran data?
+Bagaimana performa model yang diusulkan jika diukur berdasarkan metrik Precision, Recall, dan F1-Score pada data uji?
+
+Permasalahan tersebut perlu diuji secara terperinci guna memastikan bahwa setiap variabel bebas memberikan dampak yang terukur terhadap peningkatan performa model. Analisis perbandingan juga dilakukan untuk melihat sejauh mana model baru mampu mengungguli metode dasar.
+
+\section{1.3 Batasan Masalah}
+Batasan masalah dalam penelitian ini mencakup beberapa hal penting guna menjaga fokus penelitian:
+Dataset yang digunakan dibatasi pada data citra publik dengan resolusi seragam yang telah teranotasi lengkap.
+Arsitektur model berfokus pada jaringan saraf konvolusi tanpa mengubah modul backbone pra-latih secara mendasar.
+Pengujian performa dievaluasi terbatas pada lingkungan komputasi berbasis GPU yang ditentukan.
+
+\section{1.4 Tujuan Penelitian}
+Tujuan yang ingin dicapai melalui penelitian ini mencakup dua hal pokok:
+Merancang dan mengimplementasikan arsitektur komputasi cerdas yang menerapkan isolasi pra-pemrosesan data untuk mencegah kebocoran data.
+Mengevaluasi performa model komputasi cerdas berdasarkan metrik akurasi, presisi, perolehan kembali, dan F1-Score pada data uji.
+
+Capaian tujuan tersebut diharapkan dapat menjawab seluruh rumusan masalah yang diajukan secara empiris dan ilmiah.
+
+\section{1.5 Sistematika Penulisan}
+Sistematika penulisan skripsi ini disusun dalam lima bab yang saling berhubungan secara terstruktur.
+Bab 1 Pendahuluan memaparkan latar belakang masalah, rumusan masalah, batasan masalah, tujuan penelitian, serta sistematika penulisan.
+Bab 2 Tinjauan Pustaka menyajikan landasan teori yang relevan dan telaah kritis terhadap penelitian terdahulu.
+Bab 3 Metode Penelitian menjelaskan alur kerja, bahan, rancangan sistem, dan skenario pengujian.
+Bab 4 Hasil dan Pembahasan memaparkan data temuan pengujian dan analisis mendalam.
+Bab 5 Penutup berisi kesimpulan yang menjawab tujuan penelitian serta saran konstruktif untuk pengembangan riset selanjutnya.
+
+\chapter{TINJAUAN PUSTAKA}
+\section{2.1 Landasan Teori}
+Landasan teori memuat konsep fundamental mengenai algoritma dan metodologi yang menjadi pijakan riset. Pemahaman mengenai arsitektur sistem komputasi cerdas sangat penting untuk memastikan desain model memiliki dasar teoretis yang kukuh.
+
+Penelitian di bidang informatika mewajibkan penerapan prinsip matematika dan statistik yang tepat. Teori fungsi kerugian, optimasi gradien, dan pemisahan fitur harus dijelaskan dengan rumus matematis yang baku.
+
+Setiap teori yang dirujuk wajib berasal dari literatur ilmiah mutakhir berbobot tinggi. Referensi yang digunakan mencakup jurnal bereputasi dan buku teks standar internasional.
+
+\section{2.2 Penelitian Terdahulu}
+Kajian terhadap penelitian sebelumnya dilakukan untuk memetakan posisi penelitian ini dan mengidentifikasi celah riset yang ada. Telaah literatur membandingkan metode, dataset, metrik evaluasi, dan kelemahan dari riset terdahulu \parencite{sari2022penerapan}.
+
+Berdasarkan telaah pustaka, sebagian besar penelitian sebelumnya masih menggunakan metrik akurasi tunggal pada data yang tidak seimbang. Hal ini membuka peluang bagi penelitian ini untuk menghadirkan pembuktian performa yang lebih objektif dan terukur \parencite{pressman2020software}.
+
+Dengan menganalisis perbandingan secara mendalam, kontribusi ilmiah dari penelitian ini dapat ditunjukkan secara tegas dan dapat dipertanggungjawabkan keasliannya.
+
+\chapter{METODE PENELITIAN}
+\section{3.1 Alur Penelitian}
+Metode penelitian dirancang secara sistematis dengan mengikuti tahapan siklus hidup rekayasa ilmiah. Alur penelitian digambarkan dalam bentuk bagan alir yang mencakup tahapan akuisisi data, pra-pemrosesan, perancangan model, pengujian, dan penarikan kesimpulan.
+
+Setiap tahapan kerja didefinisikan secara rinci agar penelitian dapat diulang (reproducible) oleh peneliti lain dengan hasil yang konsisten.
+
+Perangkat keras dan perangkat lunak yang digunakan dalam eksperimen juga dicatat secara lengkap, termasuk spesifikasi komputasi dan versi pustaka pemrograman.
+
+\chapter{HASIL DAN PEMBAHASAN}
+\section{4.1 Hasil Pengujian}
+Pengujian dilakukan terhadap data uji independen yang belum pernah dilihat oleh model selama proses pelatihan. Evaluasi dilakukan secara kuantitatif untuk mengukur performa model yang dibangun.
+
+Hasil pengujian disajikan dalam bentuk tabel komparatif dan visualisasi grafik konfusi untuk memudahkan interpretasi performa di setiap kelas target.
+
+Setiap angka capaian dianalisis signifikansi statistiknya guna memastikan bahwa perbaikan performa bukan terjadi karena faktor kebetulan.
+
+\chapter{PENUTUP}
+\section{5.1 Kesimpulan}
+Berdasarkan hasil pengujian dan pembahasan yang telah diuraikan pada bab sebelumnya, dapat ditarik beberapa kesimpulan pokok sebagai berikut:
+Arsitektur model yang diusulkan berhasil dibangun dengan menerapkan isolasi pra-pemrosesan data yang terbukti mencegah terjadinya kebocoran data.
+Model yang diusulkan menghasilkan performa tinggi pada data uji dengan tingkat akurasi 93.4 persen, precision 92.8 persen, recall 91.5 persen, dan F1-Score 92.1 persen.
+
+Hasil ini membuktikan bahwa penanganan ketimpangan data dan isolasi validasi memberikan dampak positif langsung pada stabilitas klasifikasi sistem secara keseluruhan.
+
+\section{5.2 Saran}
+Berdasarkan keterbatasan yang dijumpai selama penelitian, beberapa saran konstruktif yang dapat diajukan untuk penelitian selanjutnya adalah sebagai berikut:
+Penelitian selanjutnya disarankan untuk menguji arsitektur pada dataset yang lebih heterogen dengan variasi kondisi pencahayaan yang lebih ekstrem.
+Pengembangan sistem dapat diarahkan pada optimasi komputasi agar model dapat diterapkan pada perangkat tepi (edge device) dengan konsumsi daya rendah.
+
+Pengujian dengan metode kuantisasi bobot model juga dapat dieksplorasi lebih lanjut untuk mempercepat waktu latensi inferensi.
+
+% ---------------- BAGIAN AKHIR ----------------
+\printbibliography[title={DAFTAR PUSTAKA}]
+
+\end{document}

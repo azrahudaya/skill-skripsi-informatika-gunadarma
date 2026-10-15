@@ -149,4 +149,5 @@ Baca `references/ketidakselarasan.md` untuk daftar konflik dan contoh. Jangan pu
 - `references/artikel-ilmiah-dan-manual-book.md`: format dan struktur luaran wajib artikel ilmiah serta manual book.
 - `references/audit-substansi-informatika.md`: audit substansi teknis AI/Data Science, Rekayasa Perangkat Lunak, dan matriks keterkaitan logika.
 - `references/panduan-latex-lyx.md`: panduan template, konfigurasi preamble LaTeX dan pengaturan LyX standar Gunadarma.
+- `references/glosarium-istilah-informatika.md`: kamus padanan baku komputasi dan istilah asing yang wajib dicetak miring.
 - PDF pedoman asli: berkas resmi Prodi Informatika 2025, sumber primer untuk redaksi dan tampilan halaman. PDF tidak didistribusikan ulang dalam repo ini; jangan samakan ringkasan skill dengan naskah asli.

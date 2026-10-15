@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """Audit naskah Skripsi Informatika Gunadarma 2025.
 
-Mendukung berkas DOCX, LaTeX (.tex), Markdown (.md), dan teks polos (.txt).
-Hanya menggunakan modul bawaan Python (stdlib: zipfile, xml, re, json, argparse).
+Mendukung berkas DOCX (.docx), LaTeX (.tex), PDF (.pdf), Markdown (.md), dan teks polos (.txt).
+Hanya menggunakan modul bawaan Python (stdlib: zipfile, xml, re, json, argparse, subprocess, shutil).
 """
 
-# ponytail: parser docx/tex ini berbasis regex dan xml sederhana tanpa dependensi eksternal;
-# batasan: styling inline font tersembunyi tidak terbaca; upgrade ke python-docx saat inspeksi styling tabel/cell kompleks diperlukan.
+# ponytail: parser docx/tex/pdf ini memakai regex, ElementTree, dan pdftotext bawaan OS;
+# batasan: tabel bersarang kompleks dan layout visual margin exact pixel memerlukan visual diff engine terpisah.
 
 import argparse
 import json
 from pathlib import Path
 import re
+import shutil
+import subprocess
 import sys
 import xml.etree.ElementTree as ET
 import zipfile
@@ -22,10 +24,13 @@ W_NS = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 def extract_text_from_docx(path: Path) -> list[dict]:
     """Ekstrak paragraf dan heading dari berkas DOCX via zipfile dan XML."""
     paragraphs = []
-    with zipfile.ZipFile(path, "r") as z:
-        if "word/document.xml" not in z.namelist():
-            return paragraphs
-        tree = ET.fromstring(z.read("word/document.xml"))
+    try:
+        with zipfile.ZipFile(path, "r") as z:
+            if "word/document.xml" not in z.namelist():
+                return paragraphs
+            tree = ET.fromstring(z.read("word/document.xml"))
+    except Exception:
+        return paragraphs
 
     for p in tree.iter(f"{W_NS}p"):
         p_style = None
@@ -42,11 +47,37 @@ def extract_text_from_docx(path: Path) -> list[dict]:
     return paragraphs
 
 
-def extract_text_from_tex(path: Path) -> list[dict]:
-    """Ekstrak bagian dan paragraf dari berkas LaTeX .tex."""
-    content = path.read_text(encoding="utf-8", errors="ignore")
+def resolve_tex_content(path: Path, visited: set | None = None) -> str:
+    """Membaca isi berkas .tex secara rekursif jika ada \\input{} atau \\include{}."""
+    if visited is None:
+        visited = set()
+    real_path = path.resolve()
+    if real_path in visited or not real_path.is_file():
+        return ""
+    visited.add(real_path)
+
+    raw_text = real_path.read_text(encoding="utf-8", errors="ignore")
     # Bersihkan komentar latex
-    content = re.sub(r"(?m)(?<!\\)%.*$", "", content)
+    clean_text = re.sub(r"(?m)(?<!\\)%.*$", "", raw_text)
+
+    def replace_input(match):
+        rel_target = match.group(2).strip()
+        candidates = [
+            real_path.parent / rel_target,
+            real_path.parent / f"{rel_target}.tex",
+        ]
+        for c in candidates:
+            if c.is_file():
+                return "\n" + resolve_tex_content(c, visited) + "\n"
+        return ""
+
+    resolved = re.sub(r"\\(input|include)\{([^}]+)\}", replace_input, clean_text)
+    return resolved
+
+
+def extract_text_from_tex(path: Path) -> list[dict]:
+    """Ekstrak bagian dan paragraf dari berkas LaTeX .tex (termasuk modul rekursif & .bib)."""
+    content = resolve_tex_content(path)
     lines = content.splitlines()
 
     paragraphs = []
@@ -73,12 +104,42 @@ def extract_text_from_tex(path: Path) -> list[dict]:
         else:
             buffer.append(line_clean)
     flush_buffer()
+
+    # Ekstrak file .bib jika dideklarasikan atau ada di direktori yang sama
+    bib_files = re.findall(r"\\(?:addbibresource|bibliography)\{([^}]+)\}", content)
+    bib_paths = []
+    for bf in bib_files:
+        bf_clean = bf.strip()
+        cand = path.parent / bf_clean if bf_clean.endswith(".bib") else path.parent / f"{bf_clean}.bib"
+        if cand.is_file():
+            bib_paths.append(cand)
+
+    if not bib_paths:
+        bib_paths = list(path.parent.glob("*.bib"))
+
+    if bib_paths:
+        paragraphs.append({"text": "DAFTAR PUSTAKA", "style": "Heading1"})
+        for bp in bib_paths:
+            try:
+                b_text = bp.read_text(encoding="utf-8", errors="ignore")
+                paragraphs.append({"text": b_text, "style": ""})
+            except Exception:
+                pass
+
     return paragraphs
 
 
-def extract_text_from_plain(path: Path) -> list[dict]:
-    """Ekstrak paragraf dan heading dari teks Markdown atau polos."""
-    content = path.read_text(encoding="utf-8", errors="ignore")
+def extract_text_from_pdf(path: Path) -> list[dict]:
+    """Ekstrak teks dari PDF menggunakan pdftotext bawaan OS."""
+    if shutil.which("pdftotext"):
+        res = subprocess.run(["pdftotext", "-layout", str(path), "-"], capture_output=True, text=True)
+        if res.returncode == 0 and res.stdout.strip():
+            return parse_plain_lines(res.stdout)
+    return []
+
+
+def parse_plain_lines(content: str) -> list[dict]:
+    """Parsing teks multibaris menjadi daftar heading dan paragraf."""
     lines = content.splitlines()
     paragraphs = []
     buffer = []
@@ -107,12 +168,20 @@ def extract_text_from_plain(path: Path) -> list[dict]:
     return paragraphs
 
 
+def extract_text_from_plain(path: Path) -> list[dict]:
+    """Ekstrak paragraf dan heading dari teks Markdown atau polos."""
+    content = path.read_text(encoding="utf-8", errors="ignore")
+    return parse_plain_lines(content)
+
+
 def parse_document(path: Path) -> list[dict]:
     ext = path.suffix.lower()
     if ext == ".docx":
         return extract_text_from_docx(path)
     if ext == ".tex":
         return extract_text_from_tex(path)
+    if ext == ".pdf":
+        return extract_text_from_pdf(path)
     return extract_text_from_plain(path)
 
 
@@ -121,12 +190,14 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
     full_text = "\n".join(p["text"] for p in paragraphs)
 
     # 1. Cek Struktur Bab (5 Bab Wajib)
+    # Mendukung BAB 1, BAB I, 1. PENDAHULUAN, maupun heading level 1 bertuliskan PENDAHULUAN (LaTeX)
+    h1_texts = [p["text"].lower() for p in paragraphs if p.get("style") == "Heading1"]
     bab_checks = {
-        "Bab 1 Pendahuluan": bool(re.search(r"(?i)\b(bab\s*1|bab\s*i)\b.*(pendahuluan)?", full_text)),
-        "Bab 2 Tinjauan Pustaka": bool(re.search(r"(?i)\b(bab\s*2|bab\s*ii)\b.*(tinjauan\s*pustaka|landasan)?", full_text)),
-        "Bab 3 Metode Penelitian": bool(re.search(r"(?i)\b(bab\s*3|bab\s*iii)\b.*(metode)?", full_text)),
-        "Bab 4 Hasil dan Pembahasan": bool(re.search(r"(?i)\b(bab\s*4|bab\s*iv)\b.*(hasil|pembahasan)?", full_text)),
-        "Bab 5 Penutup": bool(re.search(r"(?i)\b(bab\s*5|bab\s*v)\b.*(penutup|kesimpulan)?", full_text)),
+        "Bab 1 Pendahuluan": any("pendahuluan" in t for t in h1_texts) or bool(re.search(r"(?im)^(\s*bab\s*(1|i)\b|\s*1\.\s+).*pendahuluan", full_text)),
+        "Bab 2 Tinjauan Pustaka": any("tinjauan" in t or "landasan" in t for t in h1_texts) or bool(re.search(r"(?im)^(\s*bab\s*(2|ii)\b|\s*2\.\s+).*(tinjauan|landasan)", full_text)),
+        "Bab 3 Metode Penelitian": any("metode" in t or "metodologi" in t for t in h1_texts) or bool(re.search(r"(?im)^(\s*bab\s*(3|iii)\b|\s*3\.\s+).*(metode|metodologi)", full_text)),
+        "Bab 4 Hasil dan Pembahasan": any("hasil" in t or "pembahasan" in t for t in h1_texts) or bool(re.search(r"(?im)^(\s*bab\s*(4|iv)\b|\s*4\.\s+).*(hasil|pembahasan)", full_text)),
+        "Bab 5 Penutup": any("penutup" in t or "kesimpulan" in t for t in h1_texts) or bool(re.search(r"(?im)^(\s*bab\s*(5|v)\b|\s*5\.\s+).*(penutup|kesimpulan)", full_text)),
     }
 
     # 2. Cek Bagian Awal
@@ -136,17 +207,17 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
         "Abstrak (Indonesia)": bool(re.search(r"(?i)\babstrak\b", full_text)),
         "Abstract (Inggris)": bool(re.search(r"(?i)\babstract\b", full_text)),
         "Kata Pengantar": bool(re.search(r"(?i)kata\s*pengantar", full_text)),
-        "Daftar Isi": bool(re.search(r"(?i)daftar\s*isi", full_text)),
+        "Daftar Isi": bool(re.search(r"(?i)daftar\s*isi|\\tableofcontents", full_text)),
     }
 
     # 3. Hitung kata abstrak
     abstrak_indo_words = 0
     abstract_eng_words = 0
-    m_abs_id = re.search(r"(?is)\babstrak\b\s*(.*?)(?=\babstract\b|\bkata\s*pengantar\b|\bbab\s*1\b|\bbab\s*i\b)", full_text)
+    m_abs_id = re.search(r"(?is)\babstrak\b(?:\}|\])?\s*(.*?)(?=\babstract\b|\bkata\s*pengantar\b|\bdaftar\s*isi\b|\btableofcontents\b|\bpendahuluan\b|\bbab\s*(?:1|i)\b|\b1\.\s+)", full_text)
     if m_abs_id:
         abstrak_indo_words = len(re.findall(r"\b\w+\b", m_abs_id.group(1)))
 
-    m_abs_en = re.search(r"(?is)\babstract\b\s*(.*?)(?=\bkata\s*pengantar\b|\bdaftar\s*isi\b|\bbab\s*1\b|\bbab\s*i\b)", full_text)
+    m_abs_en = re.search(r"(?is)\babstract\b(?:\}|\])?\s*(.*?)(?=\bkata\s*pengantar\b|\bdaftar\s*isi\b|\btableofcontents\b|\bpendahuluan\b|\bbab\s*(?:1|i)\b|\b1\.\s+)", full_text)
     if m_abs_en:
         abstract_eng_words = len(re.findall(r"\b\w+\b", m_abs_en.group(1)))
 
@@ -181,12 +252,16 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
     dp_match = re.search(r"(?is)\bdaftar\s*pustaka\b\s*(.*)", full_text)
     dp_text = dp_match.group(1) if dp_match else ""
 
-    # Ekstrak entri pustaka (tiap entri biasanya berjarak newline atau diawali pola penulis/tahun)
-    raw_entries = [e.strip() for e in re.split(r"\n{2,}|\n(?=[A-Z][a-zA-Z\s]+,\s*\d{4})", dp_text) if len(e.strip()) > 15]
-    total_references = len(raw_entries)
+    # Deteksi entri bibtex (@article, @inproceedings, dll) atau entri teks standar
+    bibtex_entries = re.findall(r"@\w+\s*\{([^,]+),", dp_text)
+    if bibtex_entries:
+        total_references = len(bibtex_entries)
+    else:
+        raw_entries = [e.strip() for e in re.split(r"\n{2,}|\n(?=[A-Z][a-zA-Z\s]+,\s*\d{4})", dp_text) if len(e.strip()) > 15]
+        total_references = len(raw_entries)
 
-    doi_count = len(re.findall(r"\b10\.\d{4,9}/[-._;()/:A-Za-z0-9]+|doi\.org/\S+", dp_text))
-    journal_indicators = len(re.findall(r"(?i)\b(jurnal|journal|vol\.|no\.|prosiding|proceedings|trans\.|ieee|acm|sciencedirect)\b", dp_text))
+    doi_count = len(re.findall(r"\b10\.\d{4,9}/[-._;()/:A-Za-z0-9]+|doi\.org/\S+|doi\s*=\s*\{[^}]+\}", dp_text, re.IGNORECASE))
+    journal_indicators = len(re.findall(r"(?i)\b(jurnal|journal|vol\.|no\.|prosiding|proceedings|trans\.|ieee|acm|sciencedirect|@article|@inproceedings)\b", dp_text))
 
     # Rasio estimasi artikel ilmiah (jurnal/prosiding)
     journal_pct = (journal_indicators / total_references * 100) if total_references > 0 else 0
@@ -215,7 +290,7 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
             "total_detected": total_references,
             "min_20_met": total_references >= 20,
             "doi_count": doi_count,
-            "estimated_journal_pct": round(journal_pct, 1),
+            "estimated_journal_pct": round(min(journal_pct, 100.0), 1),
             "journal_70_pct_met": journal_pct >= 65,  # toleransi estimasi heuristik
         },
         "traceability": {
@@ -285,7 +360,7 @@ def format_report_cli(report: dict, filepath: Path) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Audit naskah Skripsi Informatika Gunadarma 2025")
-    parser.add_argument("file", help="Path berkas naskah (.docx, .tex, .md, .txt)")
+    parser.add_argument("file", help="Path berkas naskah (.docx, .tex, .pdf, .md, .txt)")
     parser.add_argument("--json", action="store_true", help="Keluarkan output format JSON")
     args = parser.parse_args()
 
