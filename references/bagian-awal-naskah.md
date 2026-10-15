@@ -65,22 +65,25 @@ Berdasarkan Pedoman Penulisan Skripsi Informatika 2025 dan validasi empiris 52 r
 
 ### C. Lembar Pengesahan [PDF 12, 25 / cetak 11, 24]
 - Judul: `LEMBAR PENGESAHAN` (14 pt, tebal, kapital, simetris tengah).
-- Identitas Naskah:
-  * Judul Skripsi : [Judul Lengkap]
-  * Nama Mahasiswa : [Nama Mahasiswa]
-  * NPM           : [NPM]
-  * Tanggal Lulus : [Tanggal Kelulusan Resmi Sidang]
+- Identitas Naskah (menggunakan tabel borderless 3 kolom agar titik dua lurus):
+  * `Judul Skripsi : [JUDUL LENGKAP DALAM HURUF KAPITAL TEBAL / ALL CAPS]`
+  * `Nama          : [Nama Lengkap Mahasiswa]`
+  * `NPM           : [NPM]`
+  * `Tanggal Lulus : [Tanggal Kelulusan Resmi Sidang / Yudisium]`
 - Sub-bagian: `PANITIA UJIAN` (12 pt tebal tengah).
-- Tabel Tiga Kolom (No. Urut, Nama, Kedudukan) [spasi 1.0, TNR 11-12 pt]:
-  * No. 1 : [Nama Ketua Sidang] - Ketua
-  * No. 2 : [Nama Sekretaris Sidang] - Sekretaris
-  * No. 3 : [Nama Dosen Pembimbing] - Anggota
-  * No. 4 : [Nama Dosen Penguji 1] - Anggota
-  * No. 5 : [Nama Dosen Penguji 2] - Anggota
+- Tabel Tiga Kolom Tertutup (Border Kotak Penuh / Grid Box) [spasi 1.0, TNR 11 pt]:
+  * Header Kolom: `NO`, `NAMA`, `KEDUDUKAN` (center, bold).
+  * No. 1 : [Nama Ketua Sidang] : `Ketua`
+  * No. 2 : [Nama Sekretaris Sidang] : `Sekretaris`
+  * No. 3 : [Nama Dosen Pembimbing] : `Anggota`
+  * No. 4 : [Nama Dosen Penguji 1] : `Anggota`
+  * No. 5 : [Nama Dosen Penguji 2] : `Anggota`
+  *(Catatan: Kolom kedudukan seluruh penguji dan pembimbing ditulis formal sebagai `Anggota`, tanpa tanda kurung)*
 - Bagian Persetujuan:
-  `Menyetujui,`
-  * Sisi Kiri: Dosen Pembimbing (jika 2 pembimbing: Pembimbing 1 dan Pembimbing 2). Nama pembimbing wajib satu baris.
-  * Sisi Kanan: Kepala Bagian Sidang Ujian.
+  * Kata pembuka: `Menyetujui,`
+  * Sisi Kiri: `Pembimbing,` diikuti ruang tanda tangan basah dan nama bergaris bawah `( [Nama Pembimbing beserta Gelar] )`.
+  * Sisi Kanan: `Bagian Sidang Ujian,` diikuti ruang stempel basah BAAK dan nama bergaris bawah `( [Nama Kepala Bagian Sidang Ujian] )`.
+  *(Catatan: Jabatan tidak diulang lagi di bawah garis nama)*
 
 ### D. Halaman Abstrak (Bahasa Indonesia) [PDF 14, 26 / cetak 13, 25]
 - Judul: `ABSTRAK` (14 pt, tebal, kapital, tengah).
