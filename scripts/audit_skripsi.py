@@ -200,14 +200,23 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
         "Bab 5 Penutup": any("penutup" in t or "kesimpulan" in t for t in h1_texts) or bool(re.search(r"(?im)^(\s*bab\s*(5|v)\b|\s*5\.\s+).*(penutup|kesimpulan)", full_text)),
     }
 
-    # 2. Cek Bagian Awal
+    # 2. Cek Bagian Awal Lengkap (Sebelum Bab 1) [PDF 11-16 / cetak 10-15]
     front_matter_checks = {
-        "Lembar Pengesahan": bool(re.search(r"(?i)lembar\s*pengesahan|panitia\s*ujian", full_text)),
-        "Pernyataan Orisinalitas": bool(re.search(r"(?i)orisinalitas|pernyataan\s*keaslian", full_text)),
+        "Halaman Judul": bool(re.search(r"(?i)universitas\s*gunadarma.*fakultas\s*teknologi\s*industri", full_text)),
+        "Lembar Pengesahan": bool(re.search(r"(?i)lembar\s*pengesahan", full_text)),
+        "Tabel Panitia Ujian": bool(re.search(r"(?i)panitia\s*ujian.*(ketua|sekretaris|anggota)", full_text)),
+        "Pernyataan Orisinalitas & Publikasi": bool(re.search(r"(?i)pernyataan\s*orisinalitas|orisinalitas\s*dan\s*publikasi", full_text)),
         "Abstrak (Indonesia)": bool(re.search(r"(?i)\babstrak\b", full_text)),
+        "Kata Kunci Abstrak ID": bool(re.search(r"(?i)kata\s*kunci\s*:", full_text)),
+        "Tahun Pustaka Abstrak ID": bool(re.search(r"(?i)daftar\s*pustaka\s*\(\d{4}\s*-\s*\d{4}\)", full_text)),
         "Abstract (Inggris)": bool(re.search(r"(?i)\babstract\b", full_text)),
+        "Keywords Abstract EN": bool(re.search(r"(?i)keywords\s*:", full_text)),
+        "Bibliography Years EN": bool(re.search(r"(?i)bibliography\s*\(\d{4}\s*-\s*\d{4}\)", full_text)),
         "Kata Pengantar": bool(re.search(r"(?i)kata\s*pengantar", full_text)),
+        "Hierarki Rektor / Dekan di Pengantar": bool(re.search(r"(?i)(rektor|dekan)", full_text)),
         "Daftar Isi": bool(re.search(r"(?i)daftar\s*isi|\\tableofcontents", full_text)),
+        "Daftar Tabel": bool(re.search(r"(?i)daftar\s*tabel|\\listoftables", full_text)),
+        "Daftar Gambar": bool(re.search(r"(?i)daftar\s*gambar|\\listoffigures", full_text)),
     }
 
     # 3. Hitung kata abstrak

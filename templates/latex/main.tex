@@ -1,8 +1,8 @@
 \documentclass[12pt,a4paper,oneside]{report}
 
 % ==============================================================================
-% TEMPLATE SKRIPSI INFORMATIKA UNIVERSITAS GUNADARMA 2025
-% Sesuai Buku Pedoman Penulisan Skripsi 2025, FTI Universitas Gunadarma
+% TEMPLATE RESMI SKRIPSI INFORMATIKA UNIVERSITAS GUNADARMA 2025
+% Memenuhi Standar Lengkap Bagian Awal (Sebelum Bab 1) Sesuai Pedoman 2025
 % ==============================================================================
 
 % 1. Batas Margin: Atas 4 cm, Bawah 3 cm, Kiri 4 cm, Kanan 3 cm [PDF 19 / cetak 18]
@@ -31,7 +31,7 @@
 \usepackage{fancyhdr}
 \fancypagestyle{plain}{
   \fancyhf{}
-  \fancyfoot[C]{\thepage} % Tengah bawah untuk halaman awal bab
+  \fancyfoot[C]{\thepage} % Tengah bawah untuk bagian awal dan awal bab
   \renewcommand{\headrulewidth}{0pt}
 }
 \fancypagestyle{maincontent}{
@@ -65,56 +65,217 @@
 
 \begin{document}
 
-% ---------------- BAGIAN AWAL ----------------
+% ==============================================================================
+% BAGIAN AWAL (Nomor Romawi Kecil di Tengah Bawah) [PDF 11-16 / cetak 10-15]
+% ==============================================================================
 \pagestyle{plain}
 \pagenumbering{roman}
 
-% Catatan: Halaman Judul & Lembar Pengesahan dihitung tapi nomornya tidak ditampilkan
-\setcounter{page}{1}
-
+% ------------------------------------------------------------------------------
+% 1. HALAMAN JUDUL (Cover Luar / Dalam) [PDF 11, 23 / cetak 10, 22]
+% Nomor halaman 'i' dihitung tetapi TIDAK DITAMPILKAN
+% ------------------------------------------------------------------------------
+\thispagestyle{empty}
 \begin{center}
-  \vspace*{2cm}
-  {\fontsize{14}{16}\bfseries\MakeUppercase{Judul Skripsi Deklaratif Menggambarkan Masalah Metode dan Objek}}\\[2cm]
-  {\fontsize{12}{14}\selectfont SKRIPSI}\\[1cm]
-  {\fontsize{12}{14}\selectfont Diajukan Guna Melengkapi Sebagian Syarat Dalam Mencapai Gelar Sarjana Strata Satu (S1)}\\[2cm]
-  {\fontsize{12}{14}\bfseries Nama Mahasiswa}\\
-  {\fontsize{12}{14}\bfseries NPM: 10121001}\\[3cm]
-  {\fontsize{14}{16}\bfseries PROGRAM STUDI INFORMATIKA\\FAKULTAS TEKNOLOGI INDUSTRI\\UNIVERSITAS GUNADARMA\\JAKARTA\\2025}
+  {\fontsize{14}{16}\bfseries\MakeUppercase{Universitas Gunadarma}}\\[0.2cm]
+  {\fontsize{14}{16}\bfseries\MakeUppercase{Fakultas Teknologi Industri}}\\[1.5cm]
+
+  % Placeholder logo Gunadarma diameter 6 cm
+  \vspace{1.5cm}
+  {\small [Logo Universitas Gunadarma Diameter 6 cm]}\\[1.5cm]
+
+  {\fontsize{14}{18}\bfseries\MakeUppercase{Penerapan Arsitektur Convolutional Neural Network untuk Klasifikasi Penyakit Daun Tomat pada Citra Tanaman Hortikultura}}\\[1.5cm]
+
+  {\fontsize{14}{16}\bfseries SKRIPSI}\\[0.2cm]
+  {\fontsize{12}{14}\selectfont Diajukan Guna Melengkapi Sebagian Syarat Dalam Mencapai Gelar Sarjana Strata Satu (S1)}\\[1.2cm]
+
+  {\fontsize{12}{14}\selectfont
+  \begin{tabular}{lcl}
+    \textbf{Disusun Oleh :} & & \\
+    Nama & : & Azra Hudaya \\
+    NPM & : & 10121001 \\
+    Program Studi & : & Informatika \\
+    Pembimbing & : & Dr. Ir. Pembimbing Skripsi, MMSI.
+  \end{tabular}
+  }\\[1.5cm]
+
+  \vfill
+  {\fontsize{14}{16}\bfseries JAKARTA}\\[0.1cm]
+  {\fontsize{14}{16}\bfseries 2025}
 \end{center}
 \newpage
 
-% Abstrak (Indonesia) - Maks 250 Kata, 1 Spasi
+% ------------------------------------------------------------------------------
+% 2. LEMBAR PENGESAHAN [PDF 12, 25 / cetak 11, 24]
+% Nomor halaman 'ii' dihitung tetapi TIDAK DITAMPILKAN
+% ------------------------------------------------------------------------------
+\thispagestyle{empty}
+\begin{center}
+  {\fontsize{14}{16}\bfseries LEMBAR PENGESAHAN}\\[1cm]
+\end{center}
+
+\noindent
+\begin{tabular}{p{3.2cm}cp{10.5cm}}
+  \textbf{Judul Skripsi} & : & Penerapan Arsitektur Convolutional Neural Network untuk Klasifikasi Penyakit Daun Tomat pada Citra Tanaman Hortikultura \\
+  \textbf{Nama Mahasiswa} & : & Azra Hudaya \\
+  \textbf{NPM} & : & 10121001 \\
+  \textbf{Tanggal Lulus} & : & (.....................)
+\end{tabular}\\[0.8cm]
+
+\begin{center}
+  {\fontsize{12}{14}\bfseries PANITIA UJIAN}\\[0.3cm]
+  \begin{tabular}{|c|p{8.5cm}|p{3.5cm}|}
+    \hline
+    \textbf{No. Urut} & \multicolumn{1}{c|}{\textbf{Nama}} & \multicolumn{1}{c|}{\textbf{Kedudukan}} \\
+    \hline
+    1. & (Nama Ketua Sidang) & Ketua \\
+    \hline
+    2. & (Nama Sekretaris Sidang) & Sekretaris \\
+    \hline
+    3. & Dr. Ir. Pembimbing Skripsi, MMSI. & Anggota \\
+    \hline
+    4. & (Nama Penguji 1) & Anggota \\
+    \hline
+    5. & (Nama Penguji 2) & Anggota \\
+    \hline
+  \end{tabular}
+\end{center}\\[1cm]
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+  \begin{center}
+    Menyetujui,\\
+    Pembimbing,\\[2.2cm]
+    \underline{\textbf{Dr. Ir. Pembimbing Skripsi, MMSI.}}\\
+    Dosen Pembimbing
+  \end{center}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+  \begin{center}
+    Menyetujui,\\
+    Kepala Bagian Sidang Ujian,\\[2.2cm]
+    \underline{\textbf{(Nama Pejabat Bagian Sidang)}}\\
+    Kepala Bagian Sidang Ujian
+  \end{center}
+\end{minipage}
+\newpage
+
+% ------------------------------------------------------------------------------
+% 3. LEMBAR PERNYATAAN ORISINALITAS DAN PUBLIKASI [PDF 11, 24 / cetak 10, 23]
+% Halaman 'iii' MULAI DITAMPILKAN di tengah bawah
+% ------------------------------------------------------------------------------
+\begin{center}
+  {\fontsize{14}{16}\bfseries PERNYATAAN ORISINALITAS DAN PUBLIKASI}\\[1cm]
+\end{center}
+
+\noindent
+\begin{tabular}{p{3.2cm}cp{10.5cm}}
+  \textbf{Nama} & : & Azra Hudaya \\
+  \textbf{NPM} & : & 10121001 \\
+  \textbf{Judul Skripsi} & : & Penerapan Arsitektur Convolutional Neural Network untuk Klasifikasi Penyakit Daun Tomat pada Citra Tanaman Hortikultura \\
+  \textbf{Tanggal Sidang} & : & (.....................) \\
+  \textbf{Tanggal Lulus} & : & (.....................)
+\end{tabular}\\[0.8cm]
+
+\noindent
+Menyatakan bahwa tulisan ini adalah merupakan hasil karya saya sendiri dan dapat dipublikasikan sepenuhnya oleh Universitas Gunadarma. Segala perumusan pemikiran serta kutipan yang berasal dari tulisan orang lain telah saya sebutkan sumbernya dengan jelas sesuai dengan kaidah penulisan ilmiah yang berlaku.\\[0.4cm]
+
+\noindent
+Apabila di kemudian hari terbukti atau dapat dibuktikan terdapat unsur plagiarisme atau pelanggaran hak cipta dalam tulisan ini, maka saya bersedia menerima sanksi akademik sesuai dengan peraturan perundang-undangan yang berlaku di Universitas Gunadarma dan peraturan perundang-undangan Republik Indonesia.\\[1.5cm]
+
+\begin{flushright}
+  \begin{minipage}{0.45\textwidth}
+    Jakarta, (.....................)\\[2.2cm]
+    \underline{\textbf{Azra Hudaya}}\\
+    NPM. 10121001
+  \end{minipage}
+\end{flushright}
+\newpage
+
+% ------------------------------------------------------------------------------
+% 4. ABSTRAK (Bahasa Indonesia) [PDF 14, 26 / cetak 13, 25]
+% Tepat 1 Paragraf, Spasi Tunggal, Maksimal 250 Kata
+% ------------------------------------------------------------------------------
 \begin{singlespace}
-\chapter*{ABSTRAK}
-\addcontentsline{toc}{chapter}{ABSTRAK}
-Nama Mahasiswa. 10121001\\
-\textbf{Judul Skripsi Deklaratif Menggambarkan Masalah Metode dan Objek}\\
+\begin{center}
+  {\fontsize{14}{16}\bfseries ABSTRAK}\\[0.8cm]
+\end{center}
+
+\noindent
+Azra Hudaya. 10121001\\
+\textbf{PENERAPAN ARSITEKTUR CONVOLUTIONAL NEURAL NETWORK UNTUK KLASIFIKASI PENYAKIT DAUN TOMAT PADA CITRA TANAMAN HORTIKULTURA}\\
 Skripsi. Program Studi Informatika, Fakultas Teknologi Industri, Universitas Gunadarma, 2025.\\
-Kata Kunci: Deep Learning, Evaluasi Metrik, Informatika, Klasifikasi, Reprodusibilitas.\\
-(xiv + 85 + Lampiran)\\[0.5cm]
+Kata Kunci : Akurasi, CNN, Daun Tomat, Deep Learning, Klasifikasi Citra.\\
+(+ xiv + 85 + Lampiran)\\[0.5cm]
 
-Perkembangan teknologi komputasi modern membutuhkan sistem cerdas yang mampu memproses data berskala besar secara andal dan terukur. Penelitian ini bertujuan untuk merancang dan mengimplementasikan model pembelajaran mendalam guna menyelesaikan permasalahan klasifikasi citra pada domain yang memiliki ketimpangan data. Metode yang digunakan adalah arsitektur jaringan saraf konvolusi yang dikombinasikan dengan teknik pra-pemrosesan data augmentasi dan penyeimbangan bobot kelas untuk mencegah kebocoran data pada tahap validasi.
+Perkembangan teknologi komputasi modern membutuhkan sistem cerdas yang mampu memproses data berskala besar secara andal dan terukur. Penelitian ini bertujuan untuk merancang dan mengimplementasikan model pembelajaran mendalam guna menyelesaikan permasalahan klasifikasi citra penyakit daun tomat pada domain pertanian yang memiliki ketimpangan data. Metode yang digunakan adalah arsitektur Convolutional Neural Network yang dikombinasikan dengan teknik pra-pemrosesan data augmentasi dan penyeimbangan bobot kelas untuk mencegah kebocoran data pada tahap validasi. Pengujian dilakukan menggunakan dataset citra publik dengan pembagian 80 persen data latih, 10 persen data validasi, dan 10 persen data uji. Hasil pengujian menunjukkan bahwa model yang diusulkan mencapai tingkat akurasi sebesar 93.4 persen, dengan nilai precision 92.8 persen, recall 91.5 persen, dan F1-Score sebesar 92.1 persen. Kesimpulan dari penelitian ini membuktikan bahwa penanganan ketimpangan data sebelum proses pelatihan berhasil meningkatkan performa klasifikasi secara konsisten.\\[0.8cm]
 
-Pengujian dilakukan menggunakan dataset publik dengan pembagian 80 persen data latih, 10 persen data validasi, dan 10 persen data uji. Hasil pengujian menunjukkan bahwa model yang diusulkan mencapai tingkat akurasi sebesar 93.4 persen, dengan nilai precision 92.8 persen, recall 91.5 persen, dan F1-Score sebesar 92.1 persen. Kesimpulan dari penelitian ini membuktikan bahwa penanganan ketimpangan data sebelum proses pelatihan berhasil meningkatkan performa klasifikasi secara konsisten.
+\noindent
+Daftar Pustaka (2015-2025)
 \end{singlespace}
 \newpage
 
-% Abstract (English) - Max 250 Words, Single Space
+% ------------------------------------------------------------------------------
+% 5. ABSTRACT (Bahasa Inggris) [PDF 14, 27 / cetak 13, 26]
+% Exactly 1 Paragraph, Single Spaced, Maximum 250 Words
+% ------------------------------------------------------------------------------
 \begin{singlespace}
-\chapter*{ABSTRACT}
-\addcontentsline{toc}{chapter}{ABSTRACT}
-Student Name. 10121001\\
-\textbf{Declarative Thesis Title Describing Problem Method and Object}\\
-Undergraduate Thesis. Informatics Department, Faculty of Industrial Technology, Gunadarma University, 2025.\\
-Keywords: Classification, Deep Learning, Evaluation Metrics, Informatics, Reproducibility.\\
-(xiv + 85 + Appendices)\\[0.5cm]
+\begin{center}
+  {\fontsize{14}{16}\bfseries ABSTRACT}\\[0.8cm]
+\end{center}
 
-Modern computational advancements require robust and scalable intelligent systems capable of processing large-scale data. This study aims to design and implement a deep learning architecture to address image classification challenges in domains characterized by significant class imbalance. The proposed method utilizes a convolutional neural network combined with data augmentation and class weighting techniques while strictly preventing data leakage across validation stages.
+\noindent
+Azra Hudaya. 10121001\\
+\textbf{IMPLEMENTATION OF CONVOLUTIONAL NEURAL NETWORK ARCHITECTURE FOR TOMATO LEAF DISEASE CLASSIFICATION ON HORTICULTURAL PLANT IMAGES}\\
+Undergraduate Thesis. Informatics Study Program, Faculty of Industrial Technology, Gunadarma University, 2025.\\
+Keywords : Accuracy, CNN, Deep Learning, Image Classification, Tomato Leaf.\\
+(+ xiv + 85 + Appendices)\\[0.5cm]
 
-Experiments were conducted on a public dataset partitioned into 80 percent training, 10 percent validation, and 10 percent testing sets. Experimental results demonstrate that the proposed model achieves an overall accuracy of 93.4 percent, with a precision of 92.8 percent, recall of 91.5 percent, and an F1-Score of 92.1 percent. The findings confirm that mitigating class imbalance prior to model training effectively enhances classification performance.
+Modern computational advancements require robust and scalable intelligent systems capable of processing large-scale data in agricultural environments. This study aims to design and implement a deep learning architecture to address image classification challenges in identifying tomato leaf diseases characterized by significant class imbalance. The proposed method utilizes a Convolutional Neural Network architecture combined with data augmentation and class weighting techniques while strictly preventing data leakage across validation stages. Experiments were conducted on a public image dataset partitioned into 80 percent training, 10 percent validation, and 10 percent testing sets. Experimental results demonstrate that the proposed model achieves an overall accuracy of 93.4 percent, with a precision of 92.8 percent, recall of 91.5 percent, and an F1-Score of 92.1 percent. The findings confirm that mitigating class imbalance prior to model training effectively enhances classification performance.\\[0.8cm]
+
+\noindent
+Bibliography (2015-2025)
 \end{singlespace}
 \newpage
 
+% ------------------------------------------------------------------------------
+% 6. KATA PENGANTAR [PDF 14-15, 28 / cetak 13-14, 27]
+% Memuat 7 Hierarki Ucapan Terima Kasih Resmi Gunadarma
+% ------------------------------------------------------------------------------
+\begin{center}
+  {\fontsize{14}{16}\bfseries KATA PENGANTAR}\\[1cm]
+\end{center}
+
+\noindent
+Puji dan syukur penulis panjatkan ke hadirat Tuhan Yang Maha Esa atas segala rahmat dan karunia-Nya, sehingga penulis dapat menyelesaikan penulisan skripsi yang berjudul ``Penerapan Arsitektur Convolutional Neural Network untuk Klasifikasi Penyakit Daun Tomat pada Citra Tanaman Hortikultura''. Penulisan skripsi ini disusun guna melengkapi sebagian syarat dalam mencapai gelar Sarjana Strata Satu (S1) pada Program Studi Informatika, Fakultas Teknologi Industri, Universitas Gunadarma.\\[0.3cm]
+
+\noindent
+Penulis menyadari bahwa penyusunan skripsi ini tidak lepas dari bimbingan, arahan, dan dukungan moril maupun materiel dari berbagai pihak. Oleh karena itu, pada kesempatan ini penulis menyampaikan rasa terima kasih yang sebesar-besarnya kepada:
+\begin{enumerate}
+  \item Prof. Dr. E.S. Margianti, SE., MM., selaku Rektor Universitas Gunadarma.
+  \item Prof. Dr. Ing. Adang Suhendra, SSi., SKom., MSc., selaku Dekan Fakultas Teknologi Industri, Universitas Gunadarma.
+  \item Bapak/Ibu Ketua Program Studi Informatika, Fakultas Teknologi Industri, Universitas Gunadarma.
+  \item Kepala Bagian Sidang Ujian Universitas Gunadarma beserta seluruh jajaran staf yang telah membantu kelancaran administrasi sidang.
+  \item Dr. Ir. Pembimbing Skripsi, MMSI., selaku Dosen Pembimbing yang telah meluangkan waktu dan pemikiran dengan penuh kesabaran dalam memberikan arahan dan bimbingan hingga skripsi ini selesai.
+  \item Kedua Orang Tua dan segenap keluarga tercinta yang senantiasa memberikan doa tulus, motivasi, dan dukungan yang tiada henti.
+  \item Rekan-rekan mahasiswa Program Studi Informatika Universitas Gunadarma angkatan 2021 atas diskusi dan kebersamaannya.
+\end{enumerate}
+
+\noindent
+Penulis menyadari bahwa skripsi ini masih memiliki keterbatasan. Oleh karena itu, penulis mengharapkan kritik dan saran yang konstruktif guna perbaikan di masa mendatang. Akhir kata, semoga karya ini dapat memberikan manfaat bagi perkembangan ilmu informatika.\\[1cm]
+
+\begin{flushright}
+  \begin{minipage}{0.4\textwidth}
+    Jakarta, Oktober 2025\\[2cm]
+    \textbf{Penulis}
+  \end{minipage}
+\end{flushright}
+\newpage
+
+% ------------------------------------------------------------------------------
+% 7. DAFTAR ISI, DAFTAR TABEL, DAFTAR GAMBAR [PDF 15-16 / cetak 14-15]
+% ------------------------------------------------------------------------------
 \tableofcontents
 \newpage
 \listoftables
@@ -122,7 +283,9 @@ Experiments were conducted on a public dataset partitioned into 80 percent train
 \listoffigures
 \newpage
 
-% ---------------- BAGIAN ISI (Nomor Arab) ----------------
+% ==============================================================================
+% BAGIAN ISI (Nomor Arab, 1.5 Spasi) [PDF 17-20 / cetak 16-19]
+% ==============================================================================
 \cleardoublepage
 \pagenumbering{arabic}
 \pagestyle{maincontent}
@@ -142,11 +305,17 @@ Bagaimana performa model yang diusulkan jika diukur berdasarkan metrik Precision
 
 Permasalahan tersebut perlu diuji secara terperinci guna memastikan bahwa setiap variabel bebas memberikan dampak yang terukur terhadap peningkatan performa model. Analisis perbandingan juga dilakukan untuk melihat sejauh mana model baru mampu mengungguli metode dasar.
 
+Penelitian ini memfokuskan pengujian pada aspek generalisasi model agar sistem yang dibangun tidak hanya berkinerja baik pada data pelatihan tetapi juga stabil terhadap data baru.
+
 \section{1.3 Batasan Masalah}
 Batasan masalah dalam penelitian ini mencakup beberapa hal penting guna menjaga fokus penelitian:
 Dataset yang digunakan dibatasi pada data citra publik dengan resolusi seragam yang telah teranotasi lengkap.
 Arsitektur model berfokus pada jaringan saraf konvolusi tanpa mengubah modul backbone pra-latih secara mendasar.
 Pengujian performa dievaluasi terbatas pada lingkungan komputasi berbasis GPU yang ditentukan.
+
+Penetapan batasan ini bertujuan agar analisis kinerja dapat dilakukan secara mendalam pada parameter yang relevan.
+
+Selain itu, batasan waktu pelatihan juga disesuaikan dengan kapasitas komputasi yang tersedia untuk menjaga efisiensi proses riset.
 
 \section{1.4 Tujuan Penelitian}
 Tujuan yang ingin dicapai melalui penelitian ini mencakup dua hal pokok:
@@ -155,12 +324,16 @@ Mengevaluasi performa model komputasi cerdas berdasarkan metrik akurasi, presisi
 
 Capaian tujuan tersebut diharapkan dapat menjawab seluruh rumusan masalah yang diajukan secara empiris dan ilmiah.
 
+Hasil evaluasi kuantitatif nantinya akan menjadi dasar pembuktian atas keunggulan metode yang diajukan.
+
 \section{1.5 Sistematika Penulisan}
 Sistematika penulisan skripsi ini disusun dalam lima bab yang saling berhubungan secara terstruktur.
 Bab 1 Pendahuluan memaparkan latar belakang masalah, rumusan masalah, batasan masalah, tujuan penelitian, serta sistematika penulisan.
 Bab 2 Tinjauan Pustaka menyajikan landasan teori yang relevan dan telaah kritis terhadap penelitian terdahulu.
+
 Bab 3 Metode Penelitian menjelaskan alur kerja, bahan, rancangan sistem, dan skenario pengujian.
 Bab 4 Hasil dan Pembahasan memaparkan data temuan pengujian dan analisis mendalam.
+
 Bab 5 Penutup berisi kesimpulan yang menjawab tujuan penelitian serta saran konstruktif untuk pengembangan riset selanjutnya.
 
 \chapter{TINJAUAN PUSTAKA}
@@ -202,6 +375,8 @@ Model yang diusulkan menghasilkan performa tinggi pada data uji dengan tingkat a
 
 Hasil ini membuktikan bahwa penanganan ketimpangan data dan isolasi validasi memberikan dampak positif langsung pada stabilitas klasifikasi sistem secara keseluruhan.
 
+Penelitian ini berhasil memberikan bukti empiris bahwa evaluasi menyeluruh lebih kredibel dibanding akurasi tunggal.
+
 \section{5.2 Saran}
 Berdasarkan keterbatasan yang dijumpai selama penelitian, beberapa saran konstruktif yang dapat diajukan untuk penelitian selanjutnya adalah sebagai berikut:
 Penelitian selanjutnya disarankan untuk menguji arsitektur pada dataset yang lebih heterogen dengan variasi kondisi pencahayaan yang lebih ekstrem.
@@ -209,7 +384,9 @@ Pengembangan sistem dapat diarahkan pada optimasi komputasi agar model dapat dit
 
 Pengujian dengan metode kuantisasi bobot model juga dapat dieksplorasi lebih lanjut untuk mempercepat waktu latensi inferensi.
 
-% ---------------- BAGIAN AKHIR ----------------
+% ==============================================================================
+% BAGIAN AKHIR [PDF 18, 20 / cetak 17, 19]
+% ==============================================================================
 \printbibliography[title={DAFTAR PUSTAKA}]
 
 \end{document}

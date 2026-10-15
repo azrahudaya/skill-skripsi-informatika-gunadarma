@@ -44,7 +44,7 @@ def main() -> None:
     check("Harvard" in skill, "SKILL.md must state the Harvard reference format")
 
     references = set(re.findall(r"`(references/[^`]+\.md)`", skill))
-    check(len(references) == 25, f"expected 25 packaged references, found {len(references)}")
+    check(len(references) == 26, f"expected 26 packaged references, found {len(references)}")
     for relative in references:
         check((ROOT / relative).is_file(), f"missing reference: {relative}")
 
@@ -63,7 +63,7 @@ def main() -> None:
     check(not list(ROOT.rglob("*.pdf")), "source PDF must not be included in this package")
     print(
         "PASS: skill metadata, 36 topics, 9 appendices, 34-page index, "
-        "25 references, public-file checks"
+        "26 references, public-file checks"
     )
 
 

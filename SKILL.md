@@ -49,7 +49,7 @@ Untuk membuat naskah dari nol, ikuti 9 fase eksekusi di `references/panduan-pemb
 
 ## 2. Struktur naskah dan bagian awal [PDF 11-16 / cetak 10-15]
 
-Tiga bagian: Bagian Awal, Bagian Isi, Bagian Akhir. Urutan bagian awal: (a) Halaman Judul, (b) Pernyataan Orisinalitas dan Publikasi, (c) Lembar Pengesahan, (d) Abstrak, (e) Abstract, (f) Kata Pengantar, (g) Daftar Isi, (h) Daftar Tabel / Daftar Gambar / Daftar Lampiran [PDF 11 / cetak 10].
+Tiga bagian: Bagian Awal, Bagian Isi, Bagian Akhir. Urutan bagian awal: (a) Halaman Judul, (b) Lembar Pengesahan, (c) Pernyataan Orisinalitas dan Publikasi, (d) Abstrak, (e) Abstract, (f) Kata Pengantar, (g) Daftar Isi, (h) Daftar Tabel / Daftar Gambar / Daftar Lampiran [PDF 11 / cetak 10]. Panduan detail dan redaksi baku setiap halaman diatur di `references/bagian-awal-naskah.md`.
 
 - **Halaman Judul**: memuat Nama Universitas, Nama Fakultas, Logo, Judul, Nama Penulis, NPM, Program Studi, Nama Pembimbing, Tujuan dan dalam rangka apa karya dibuat, Kota, Tahun Pembuatan Skripsi [PDF 11 / cetak 10]. Diketik simetris tengah, Times New Roman, spasi tunggal; logo Gunadarma diameter 6 cm; Nama Universitas, Nama Fakultas, Judul, Kota, dan Tahun 14 pt kapital; Nama Penulis, NPM, Program Studi, Pembimbing, Tujuan, dan dalam rangka apa dibuat 12 pt. Contoh Lampiran 6.1 memakai redaksi `Disusun Oleh :` dan mencantumkan `Diajukan Guna Melengkapi Sebagian Syarat Dalam Mencapai Gelar Sarjana Strata Satu (S1)`. Lihat `references/konflik-visual-lampiran.md` untuk perbedaan ukuran pada contoh.
 - **Pernyataan Orisinalitas dan Publikasi**: memuat Nama, NPM, Judul Skripsi, Tanggal Sidang, Tanggal Lulus, dan pernyataan karya sendiri serta izin publikasi penuh oleh Universitas. TNR 12 pt, spasi 1,5, rata kiri-kanan [PDF 11 / cetak 10]. Lampiran 6.2 menampilkan redaksi lengkap dan penutup `Jakarta, tanggal`, tanda tangan, nama penulis. Jangan isi tanggal atau tanda tangan sebelum faktanya tersedia.
@@ -151,4 +151,5 @@ Baca `references/ketidakselarasan.md` untuk daftar konflik dan contoh. Jangan pu
 - `references/panduan-latex-lyx.md`: panduan template, konfigurasi preamble LaTeX dan pengaturan LyX standar Gunadarma.
 - `references/glosarium-istilah-informatika.md`: kamus padanan baku komputasi dan istilah asing yang wajib dicetak miring.
 - `references/panduan-pembuatan-dari-nol.md`: alur kerja 9 fase pembuatan skripsi dari nol bagi AI dan mahasiswa.
+- `references/bagian-awal-naskah.md`: format detail setiap komponen sebelum Bab 1 (judul, pengesahan, orisinalitas, abstrak, pengantar, daftar isi).
 - PDF pedoman asli: berkas resmi Prodi Informatika 2025, sumber primer untuk redaksi dan tampilan halaman. PDF tidak didistribusikan ulang dalam repo ini; jangan samakan ringkasan skill dengan naskah asli.
