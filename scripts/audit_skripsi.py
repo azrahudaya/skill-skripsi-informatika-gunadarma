@@ -227,7 +227,7 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
         "Tahun Pustaka Abstrak ID": bool(re.search(r"(?i)daftar\s*pustaka\s*\(\d{4}\s*-\s*\d{4}\)", full_text)),
         "Abstract (Inggris)": bool(re.search(r"(?i)\babstract\b", full_text)),
         "Keywords Abstract EN": bool(re.search(r"(?i)keywords\s*:", full_text)),
-        "Bibliography Years EN": bool(re.search(r"(?i)bibliography\s*\(\d{4}\s*-\s*\d{4}\)", full_text)),
+        "Bibliography Years EN": bool(re.search(r"(?i)(?:bibliography|references)\s*\(\d{4}\s*-\s*\d{4}\)", full_text)),
         "Kata Pengantar": bool(re.search(r"(?i)kata\s*pengantar", full_text)),
         "Hierarki Rektor / Dekan di Pengantar": bool(re.search(r"(?i)(rektor|dekan)", full_text)),
         "Daftar Isi": bool(re.search(r"(?i)daftar\s*isi|\\tableofcontents", full_text)),
