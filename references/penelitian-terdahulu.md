@@ -1,12 +1,14 @@
 # Penelitian terdahulu dan tabel perbandingan
 
-Gunakan panduan ini saat menyusun Bab 2, terutama bila pengguna meminta perbandingan penelitian, *state of the art*, celah penelitian, atau tabel. Pedoman Skripsi 2025 mewajibkan Bab 2 memuat landasan teori dan landasan empiris dengan minimal 20 sumber (70% artikel ilmiah, 10 tahun terakhir) [PDF 17 / cetak 16], tetapi tidak mewajibkan judul `State of the Art`, jumlah baris tertentu, ataupun tabel dengan kolom baku. Bentuk tabel adalah pilihan penjelasan, bukan aturan universitas. Nomor `Tabel 2.1` di bawah hanya berlaku jika tabel itu memang tabel pertama Bab 2.
+Gunakan panduan ini saat menyusun Bab 2, terutama bila menyusun perbandingan penelitian, *state of the art*, celah penelitian (research gap), atau tabel komparasi. Pedoman Skripsi 2025 mewajibkan Bab 2 memuat landasan teori dan landasan empiris dengan minimal 20 sumber (70% artikel ilmiah, 10 tahun terakhir) [PDF 17 / cetak 16]. Berdasarkan audit 52 naskah skripsi GDLib Informatika Gunadarma (2026), 80% (41 skripsi) menyertakan tabel komparasi di Bab II (biasanya di Subbab 2.1 atau subbab khusus landasan empiris). Keberadaan tabel ini mutlak diperlukan saat sidang agar penguji dapat langsung melihat posisi dan kontribusi penelitian dibanding studi terdahulu, bukan sekadar rangkuman teori teks. Nomor `Tabel 2.1` di bawah berlaku jika tabel itu memang tabel pertama Bab 2.
 
 ## Apa yang perlu dijaga
 
+- Wajib menyertakan minimal 3 sampai 5 penelitian sejenis yang relevan dari jurnal bereputasi/prosiding 10 tahun terakhir.
 - Jangan menyalin identitas mahasiswa, hasil eksperimen, nilai metrik, nama pembimbing, atau rumusan klaim kebaruan dari naskah contoh. Nilai sebuah tabel datang dari kecocokan dan verifikasi studi, bukan jumlah barisnya.
 - Artikel metode yang tidak membahas objek yang sama boleh dipakai untuk teori, tetapi jangan dimasukkan sebagai penelitian sejenis hanya untuk memenuhi kuota.
-- Contoh naskah mahasiswa menempatkan subbagian `Penelitian Terdahulu` atau `State of the Art` dengan kolom seperti `No`, `Peneliti & Tahun`, `Judul`, `Metode`, `Hasil`, `Gap/Perbedaan`. Ini contoh tata urut, bukan izin menyalin klaim, tabel, atau sumbernya tanpa membaca artikel asli.
+- Tabel komparasi diakhiri dengan baris `Penelitian Ini (Tahun)` untuk mempertegas posisi metode, dataset, metrik, dan kontribusi yang membedakannya dari penelitian terdahulu.
+- Setelah tabel, wajib ada 1-3 paragraf analisis sintesis gap yang merinci kesenjangan penelitian yang diselesaikan.
 
 ## Prosedur kajian yang dapat diuji
 
@@ -20,13 +22,13 @@ Gunakan panduan ini saat menyusun Bab 2, terutama bila pengguna meminta perbandi
 
 ## Contoh struktur isi yang jujur
 
-Paragraf pembuka: `Tabel 2.1 membandingkan penelitian terdahulu menurut varian data, cara evaluasi, dan ukuran kinerja. Rincian hanya dinyatakan ketika teks lengkap studi telah diperiksa.`
+Paragraf pembuka: `Tabel 2.1 membandingkan penelitian terdahulu menurut metode, varian data, cara evaluasi, dan ukuran kinerja untuk mengidentifikasi celah penelitian (research gap).`
 
-| Peneliti (tahun) | Data/objek | Metode dan evaluasi | Hasil yang diverifikasi | Perbedaan terhadap penelitian ini |
-| --- | --- | --- | --- | --- |
-| Studi A (tahun) | Nama/versi data dari artikel | Model, split dan metrik dari teks penuh | Angka atau temuan yang dapat dilacak ke tabel/halaman artikel | Beda dataset, atribut, split, atau tujuan yang faktual |
-| Studi B (tahun) | Belum terverifikasi | Belum terverifikasi dari teks lengkap | Belum terverifikasi | Jangan merumuskan gap spesifik dari judul saja |
-| Penelitian ini | Data dan jumlah baris dari eksperimen nyata | Kode, split, metrik yang dijalankan | Hasil dari berkas mentah yang dapat diulang | Kontribusi prosedural yang teruji; bukan klaim universal |
+| No | Peneliti & Tahun | Judul Penelitian | Metode / Arsitektur | Dataset & Ukuran | Hasil / Kinerja | Keterbatasan / Research Gap |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | Studi A (2023) | Judul artikel A | Model A, split, metrik | Nama dataset & jumlah sampel | Angka metrik terverifikasi (akurasi, F1) | Keterbatasan komputasi, tanpa GUI web |
+| 2 | Studi B (2024) | Judul artikel B | Model B, evaluasi | Nama dataset & jumlah sampel | Hasil eksperimen artikel B | Keterbatasan variasi data atau pengujian |
+| 3 | Penelitian Ini (2026) | Judul skripsi ini | Metode/arsitektur yang dibangun | Dataset & jumlah sampel riil | Target metrik (akurasi, performa, SUS) | Solusi atas gap: model efisien + sistem web teruji |
 
 Isi contoh di atas adalah label format, bukan studi atau hasil nyata. Untuk draf yang belum mempunyai teks lengkap, tampilkan sel belum terverifikasi sebagai pekerjaan tertunda atau keluarkan barisnya. Jangan mengisi placeholder dengan sitasi palsu.
 

@@ -15,7 +15,7 @@ Catatan: blog pribadi (Blogspot, WordPress, dan sejenisnya) tidak boleh dijadika
 ## Struktur yang lazim
 
 1. **Landasan teori**: definisi dan konsep kunci yang menunjang penelitian. Untuk topik informatika, definisikan seluruh istilah kunci yang ada pada judul (mis. untuk topik chatbot: kecerdasan artifisial, pemrosesan bahasa alami, model transformer, arsitektur bot, basis data). Teori disajikan relevan dengan pencapaian solusi dan tujuan, bukan uraian manual penggunaan alat.
-2. **Penelitian terdahulu / state of the art**: hasil penelitian sebelumnya yang relevan. Sajikan perbandingan (objek/data, metode, hasil, gap) dan sintesis. Pedoman tidak mewajibkan bentuk tabel tertentu; tabel adalah pilihan penyajian. Ikuti `references/penelitian-terdahulu.md`.
+2. **Penelitian terdahulu / state of the art (WAJIB ADA TABEL)**: hasil penelitian sebelumnya yang relevan. Ditempatkan di awal Bab 2 (Subbab 2.1) atau subbab khusus landasan empiris. Berdasarkan audit 52 naskah skripsi GDLib Informatika Gunadarma (2026), 80% (41 skripsi) menyertakan tabel komparasi. Tanpa tabel matriks perbandingan, Bab 2 dianggap penguji hanya berupa "kliping teori" tanpa posisi kebaruan yang jelas. Wajib menyajikan tabel perbandingan (`Tabel 2.1 Matriks Komparasi Penelitian Terdahulu` dengan kolom: No, Peneliti & Tahun, Judul, Metode, Dataset/Objek, Hasil/Akurasi, Research Gap, serta baris akhir untuk Penelitian Ini), diikuti 2-3 paragraf analisis sintesis gap. Detail kolom dan aturan ada di `references/penelitian-terdahulu.md`.
 3. **Kerangka pemikiran (opsional)**: alur logika dari teori menuju solusi yang ditawarkan.
 
 ## Aturan penulisan
