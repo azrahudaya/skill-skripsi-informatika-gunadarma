@@ -9,7 +9,9 @@
 
 ![Thumbnail Skripsi Informatika Gunadarma](assets/thumbnail.png)
 
-AI coding agent skill for writing, structuring, and auditing the undergraduate thesis (Skripsi) of the Informatics Study Program at Gunadarma University, based on the official 2025 guidelines. Compatible with Claude Code, OpenAI Codex, and Hermes Agent.
+AI coding agent skill for writing, structuring, and auditing the undergraduate thesis (Skripsi) of the Informatics Study Program at Gunadarma University, based on the official 2025 guidelines and empirical analysis of 52 GDLib 2026 manuscripts. Compatible with Claude Code, OpenAI Codex, and Hermes Agent.
+
+Skill ini dirancang untuk memandu penulisan dan audit naskah Skripsi S1 Informatika Universitas Gunadarma (FTI): dari perancangan Bab 1-5, tabel komparasi penelitian terdahulu (state of the art), panduan visual dan kuantitas gambar per bab, sitasi Harvard ber-DOI, hingga pemecahan berkas repositori GDLib (01-19).
 
 Read the full rule specification in [`SKILL.md`](SKILL.md).
 
