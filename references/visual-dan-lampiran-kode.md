@@ -48,6 +48,27 @@ Gunakan panduan ini saat naskah memuat tabel data, diagram alur, arsitektur sist
 4. Lakukan eksekusi ulang kode terhadap input tetap, cocokkan keluaran mentah dengan tabel/grafik pada naskah, catat lingkungan perangkat lunak. Jangan menyamakan kode yang terlihat benar dengan hasil yang benar-benar dijalankan.
 5. Setelah render, audit nomor halaman `L-1`, `L-2` dan seterusnya, Daftar Lampiran, header per berkas, serta tidak ada potongan kode yang tertinggal di luar halaman.
 
-## 7. Bukti minimum saat menyerahkan
+## 7. Panduan kuantitas gambar per bab dan sumber gambar (Empiris GDLib 2026)
+
+Berdasarkan analisis empiris terhadap 52 naskah skripsi GDLib Informatika Gunadarma angkatan 2026, berikut panduan jumlah gambar dan fleksibilitas sumbernya:
+
+### A. Rentang jumlah gambar per bab dan total
+- **Total gambar per skripsi:** Rentang ideal **20 sampai 45 gambar** (rata-rata GDLib: 36.8 gambar, median: 31.0 gambar). Batas bawah minimal 15 gambar (untuk riset algoritma/teoritis), batas atas 50 gambar (kecuali topik game development yang bisa mencapai 70-150 gambar karena dokumentasi aset/level).
+- **Bab 1 (Pendahuluan):** **0 gambar (mutlak).** 100% skripsi GDLib tidak memuat gambar di Bab 1. Seluruh bagian adalah teks narasi akademik.
+- **Bab 2 (Tinjauan Pustaka):** **3 sampai 8 gambar** (min 1, max 15). Berisi arsitektur model dasar (CNN, MobileNetV2, Inverted Residuals, Transformer, YOLO), diagram konsep, atau ilustrasi medis/objek penelitian.
+- **Bab 3 (Metode Penelitian):** **8 sampai 15 gambar** (min 3, max 30). Berisi flowchart alur metodologi (CRISP-DM/SDLC), diagram arsitektur sistem terpadu, pemodelan UML (Use Case, Activity Diagram), dan wireframe/mockup UI.
+- **Bab 4 (Hasil dan Pembahasan):** **12 sampai 25 gambar** (min 5, max 35). Porsi gambar terbanyak: tangkapan layar antarmuka aplikasi hasil jadi, kurva pelatihan (loss & accuracy curve), Confusion Matrix, visualisasi hasil deteksi/prediksi, serta grafik evaluasi SUS.
+- **Bab 5 (Penutup):** **0 gambar (mutlak).** Hanya memuat butir Kesimpulan dan Saran.
+
+### B. Fleksibilitas sumber gambar (tidak wajib digenerate sendiri)
+- **Gambar eksternal/literatur diperbolehkan:** Gambar tidak harus semuanya digenerate sendiri lewat kode atau dibuat dari nol. Ilustrasi arsitektur model, diagram konsep teoritis, atau citra sampel medis pada Bab 2 sangat wajar dan lumrah diambil dari publikasi rujukan aslinya (misalnya diagram MobileNetV2 dari Sandler et al., 2018, atau ilustrasi anatomi paru-paru dari Kemenkes/jurnal medis).
+- **Syarat gambar eksternal:**
+  1. Resolusi tinggi, tajam, dan tidak buram/pecah saat dicetak.
+  2. Wajib mencantumkan sumber sitasi resmi di ujung judul gambar, format: `Gambar 2.x Arsitektur MobileNetV2 (Sumber: Sandler et al., 2018)`.
+  3. Sumber sitasi tersebut wajib tercantum lengkap di Daftar Pustaka.
+- **Gambar mandiri (Bab 3 dan Bab 4):**
+  Untuk Bab 3 (flowchart rancanganmu, diagram sistemmu) dan Bab 4 (screenshot aplikasi buatanmu, kurva pelatihan hasil eksperimen kodemu, confusion matrix kodemu), gambar wajib merupakan hasil karya mandiri dari eksperimen nyata tanpa atribusi sumber luar.
+
+## 8. Bukti minimum saat menyerahkan
 
 Laporkan untuk setiap visual: tujuan, sumber data, skrip, kesamaan angka dengan output, ukuran cetak, dan lokasi halaman. Untuk lampiran: daftar berkas, hash, cakupan kode tercetak dan elektronik, hasil eksekusi ulang, kesamaan isi lampiran dengan sumber, dan status pemeriksaan PDF akhir. Jika sumber Word asli tidak tersedia, nyatakan bahwa DOCX belum diverifikasi dengan Word, lalu jangan menyamakan render Chrome/LibreOffice dengan hasil cetak Word.
