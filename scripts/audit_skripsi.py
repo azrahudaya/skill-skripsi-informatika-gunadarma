@@ -319,6 +319,19 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
     is_ai = bool(re.search(r"(?i)(machine\s*learning|deep\s*learning|cnn|lstm|dataset|akurasi|precision|recall|f1-score|confusion\s*matrix)", full_text))
     is_se = bool(re.search(r"(?i)(use\s*case|sequence\s*diagram|class\s*diagram|black\s*box|uat|blackbox|framework|database|erd)", full_text))
 
+    # 7. Audit Tabel Penelitian Terdahulu / State of the Art (Bab 2)
+    has_tabel_penelitian_terdahulu = bool(re.search(r"(?i)tabel\s*2\.\d+.*?(penelitian\s*terdahulu|penelitian\s*terkait|studi\s*terdahulu|state\s*of\s*the\s*art|matriks\s*komparasi)", full_text))
+    is_at_subbab_2_1 = bool(re.search(r"(?i)(?:subbab\s+)?2\.1\s+.*?(penelitian\s*terdahulu|penelitian\s*terkait|studi\s*terdahulu|state\s*of\s*the\s*art|matriks\s*komparasi)", full_text))
+    has_baris_penelitian_ini = bool(re.search(r"(?i)(penelitian\s*(yang\s*diajukan|ini)|usulan\s*penelitian)", full_text))
+
+    # 8. Verifikasi Kuantitas & Distribusi Gambar/Tabel
+    figures = re.findall(r"(?i)\bgambar\s*(\d+)[\.\s]+(\d+)", full_text)
+    unique_figures = set(figures)
+    fig_bab1 = [f for f in unique_figures if f[0] == "1"]
+    fig_bab5 = [f for f in unique_figures if f[0] == "5"]
+    tables = re.findall(r"(?i)\btabel\s*(\d+)[\.\s]+(\d+)", full_text)
+    unique_tables = set(tables)
+
     return {
         "bab_checks": bab_checks,
         "front_matter_checks": front_matter_checks,
@@ -342,6 +355,19 @@ def audit_manuscript(paragraphs: list[dict]) -> dict:
             "has_tujuan": has_tujuan,
             "has_kesimpulan": has_kesimpulan,
             "domain_detected": "AI / Data Science" if is_ai and not is_se else "Software Engineering" if is_se and not is_ai else "Campuran / Khusus" if is_ai and is_se else "Umum",
+        },
+        "literature_review": {
+            "has_table": has_tabel_penelitian_terdahulu,
+            "is_subbab_2_1": is_at_subbab_2_1,
+            "has_current_research_row": has_baris_penelitian_ini,
+        },
+        "visual_and_tables": {
+            "total_figures": len(unique_figures),
+            "total_tables": len(unique_tables),
+            "bab1_figures_count": len(fig_bab1),
+            "bab5_figures_count": len(fig_bab5),
+            "bab1_clean": len(fig_bab1) == 0,
+            "bab5_clean": len(fig_bab5) == 0,
         },
     }
 
@@ -398,6 +424,24 @@ def format_report_cli(report: dict, filepath: Path) -> str:
     lines.append(f"   Rumusan Masalah  : {'Ditemukan' if tr['has_rumusan_masalah'] else 'Belum ditemukan'}")
     lines.append(f"   Tujuan Penelitian: {'Ditemukan' if tr['has_tujuan'] else 'Belum ditemukan'}")
     lines.append(f"   Kesimpulan       : {'Ditemukan' if tr['has_kesimpulan'] else 'Belum ditemukan'}")
+
+    lines.append("")
+    lines.append("7. TELAAH PENELITIAN TERDAHULU (BAB 2) [STANDAR EMPIRIS GDLIB 2026]")
+    lit = report["literature_review"]
+    t_status = "SESUAI (DITEMUKAN)" if lit["has_table"] else "TIDAK DITEMUKAN (WAJIB ADA TABEL)"
+    lines.append(f"   Tabel Komparasi  : {t_status}")
+    lines.append(f"   Posisi Subbab 2.1: {'Ya (Direkomendasikan)' if lit['is_subbab_2_1'] else 'Di subbab lain / akhir'}")
+    lines.append(f"   Baris Penelitian : {'Memuat baris usulan penelitian ini' if lit['has_current_research_row'] else 'Belum memuat perbandingan penelitian ini'}")
+
+    lines.append("")
+    lines.append("8. KUANTITAS & DISTRIBUSI GAMBAR / TABEL")
+    vt = report["visual_and_tables"]
+    lines.append(f"   Total Gambar     : {vt['total_figures']} gambar unik (Rata-rata GDLib: 20-45 gambar)")
+    lines.append(f"   Total Tabel      : {vt['total_tables']} tabel unik")
+    b1_stat = "SESUAI (0 gambar)" if vt["bab1_clean"] else f"PERLU REVISI ({vt['bab1_figures_count']} gambar di Bab 1)"
+    b5_stat = "SESUAI (0 gambar)" if vt["bab5_clean"] else f"PERLU REVISI ({vt['bab5_figures_count']} gambar di Bab 5)"
+    lines.append(f"   Distribusi Bab 1 : {b1_stat}")
+    lines.append(f"   Distribusi Bab 5 : {b5_stat}")
     lines.append("========================================================")
     return "\n".join(lines)
 
